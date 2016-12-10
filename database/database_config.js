@@ -5,4 +5,4 @@ var db_connection = new Sequelize('app_data', 'root', '', {
   port: 3306
 });
 
-module.exports.db_connection = db connection;
+module.exports.db_connection = db_connection;
