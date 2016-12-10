@@ -1,5 +1,5 @@
 export default class TaskNav extends React.Component {
-  constrcutor(props) {
+  constructor(props) {
     super(props)
     this.state = {
 
