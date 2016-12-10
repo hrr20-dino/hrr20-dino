@@ -1,4 +1,6 @@
 import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 import AddCircleOutline from 'material-ui/svg-icons/file/add-circle-outline';
 import ArrowBack from 'material-ui/svg-icons/file/arrow-back';

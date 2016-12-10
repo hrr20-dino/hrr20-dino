@@ -1,4 +1,10 @@
 import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import RoutineNav from './routine-nav.react.js';
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 
 export default class Routine extends React.Component {
   constructor(props) {
@@ -10,7 +16,19 @@ export default class Routine extends React.Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        <RoutineNav />
+        <Paper style={} zDepth={4} />
+          <List>
+            // for each task in routine
+            <Divider />
+            <ListItem
+              primaryText={}
+              rightIcon={<Launch onClick={} />}
+            />
+          </List>
+        <Paper />
+      </div>
     );
   }
 }

@@ -5,6 +5,9 @@ import RoutineStore from '../stores/routine-store';
 import RoutineActions from '../actions/routine-actions';
 import TaskStore from '../stores/task-store';
 import TaskActions from '../actions/task-actions';
+import MyRoutinesNav from './my-routines-nav.react.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
@@ -24,6 +27,7 @@ export default class MyRoutines extends React.Component {
   render() {
     return (
       <div>
+        <MyRoutinesNav />
         // map over user routine data to create card routine for each routine
         <Paper style={} zDepth={4} />
           <AppBar
@@ -41,7 +45,7 @@ export default class MyRoutines extends React.Component {
             <Divider />
             <ListItem
               primaryText={}
-              rightIcon={<Launch onClick={}
+              rightIcon={<Launch onClick={} />}
             />
           </List>
         <Paper />
