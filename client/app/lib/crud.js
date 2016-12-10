@@ -7,7 +7,8 @@
 
 let instance = null;
 
-import axios from 'axios';
+import Axios from 'axios';
+import config from '../config/config.js';
 
 export default class Crud {
   constructor() {
@@ -15,11 +16,15 @@ export default class Crud {
       instance = this;
     }
 
+    this.axios = Axios.create({
+      baseURL: config.baseURL
+    });
+
     return instance;
   }
 
   get(endpoint, params = { limit: 10, orderBy: 'desc' }) {
-    axios.get(`/${endpoint}`, {
+    this.axios.get(`/${endpoint}`, {
       params: params
     })
       .then((res) => {
@@ -31,7 +36,7 @@ export default class Crud {
   }
 
   post(endpoint, params) {
-    axios.post(`/${endpoint}`, params)
+    this.axios.post(`/${endpoint}`, params)
       .then((res) => {
         return res;
       })
@@ -41,7 +46,7 @@ export default class Crud {
   }
 
   update(endpoint, data, params) {
-    axios.put(`/${endpoint}`, data, params)
+    this.axios.put(`/${endpoint}`, data, params)
       .then((res) => {
         return res;
       })
@@ -51,7 +56,7 @@ export default class Crud {
   }
 
   delete(endpoint, params) {
-    axios.delete(`/${endpoint}`, params)
+    this.axios.delete(`/${endpoint}`, params)
       .then((res) => {
         return res;
       })
@@ -59,6 +64,4 @@ export default class Crud {
         console.error(err);
       });
   }
-
-
 }
