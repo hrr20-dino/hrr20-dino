@@ -231,7 +231,7 @@ gulp.task('lint', ['uglify'], () => {
     .pipe(eslint.failAfterError());
 });
 
-
+// run `gulp test` or `npm test` to kick off mocha
 gulp.task('test', function () {
   return gulp.src(path.SPEC, { read: false })
     .pipe(mocha({
