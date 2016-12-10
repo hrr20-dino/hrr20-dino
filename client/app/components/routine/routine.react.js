@@ -2,9 +2,11 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RoutineNav from './routine-nav.react.js';
+import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Paper from 'material-ui/Paper';
+import Launch from 'material-ui/svg-icons/file/launch';
+
 
 export default class Routine extends React.Component {
   constructor(props) {

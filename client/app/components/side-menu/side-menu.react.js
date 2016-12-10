@@ -7,6 +7,11 @@ import TaskStore from '../stores/task-store';
 import TaskActions from '../actions/task-actions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import List from 'material-ui/svg-icons/social/list';
+import Power from 'material-ui/svg-icons/social/power-settings-new';
+
 
 export default class SideMenu extends React.Component {
   constructor(props) {
@@ -18,7 +23,26 @@ export default class SideMenu extends React.Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        <Drawer
+          open="true"
+          className="">
+          <div>{user.name}</div>
+          <Menu>
+            <MenuItem
+              primaryText="My Routines"
+              rightIcon={<List />}
+              onClick={}
+            />
+            <Divider />
+            <MenuItem
+              primaryText="Logout"
+              rightIcon={<Power />}
+              onClick={}
+             />
+          </Menu>
+        </Drawer>
+      </div>
     );
   }
 }
