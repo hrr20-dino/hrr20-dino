@@ -30,7 +30,7 @@ var Task = db_connection.define('task', {
 User.hasMany(Routine);
 Routine.hasMany(Task);
 
-//#######################__Syncs Tables__##############################
+//#######################__Sync Tables__##############################
 
 Task.sync().then(console.log('Success!!')).error(console.log('Error creating Task table!'));
 Routine.sync().then(console.log('Success!!')).error(console.log('Error creating Routine table!'));
