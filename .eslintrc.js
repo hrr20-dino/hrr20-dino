@@ -29,6 +29,9 @@ module.exports = {
             "error",
             "unix"
         ],
+        "no-console": [
+          "warn"
+        ],
         "no-unused-vars": [
             "warn"
         ],
