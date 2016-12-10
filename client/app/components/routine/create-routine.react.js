@@ -1,4 +1,6 @@
 import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import CreateRoutineNav from './create-routine-nav.react.js';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
