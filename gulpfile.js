@@ -26,8 +26,7 @@ const browserSync = require('browser-sync');
 const vendors = [
   'react',
   'react-dom',
-  'classnames',
-  'axios'
+  'classnames'
 ];
 
 var path = {
@@ -48,32 +47,32 @@ var path = {
 };
 
 /*
- Build environment is determined by NODE_ENV:
+    Build environment is determined by NODE_ENV:
 
- * The `gulp` command will build according to the NODE_ENV environment variable.
- * To build for production while NODE_ENV is *not* set to `development`,
- run `gulp production` explicitly. Note that NODE_ENV will be set
- to `production` anyway by Gulp in this case.
+    * The `gulp` command will build according to the NODE_ENV environment variable.
+    * To build for production while NODE_ENV is *not* set to `development`,
+        run `gulp production` explicitly. Note that NODE_ENV will be set
+        to `production` anyway by Gulp in this case.
  */
 
 gulp.task('default', ([process.env.NODE_ENV === 'production' ? 'production' : 'development']));
 
 
 gulp.task('development', ['clean',
-  'build',
-  'copy',
-  'sass',
-  'watch']);
+                          'build',
+                          'copy',
+                          'sass',
+                          'watch']);
 
 
 gulp.task('production',  ['apply-prod-environment',
-  'clean',
-  'copy',
-  'sass',
-  'build',
-  'lint',
-  'uglify',
-  'test']);
+                          'clean',
+                          'copy',
+                          'sass',
+                          'build',
+                          'lint',
+                          'uglify',
+                          'test']);
 
 // This task allows you to run `gulp production` and still get the benefits of having NODE_ENV set to `production`.
 // Some vendor packages like 'react' will deploy a production version when this environment variable is set.
@@ -88,14 +87,14 @@ gulp.task('apply-prod-environment', () => {
 gulp.task('clean', () => {
 
   if (process.env.NODE_ENV === 'production') {
-  return gulp
-    .src([`${path.DEST}/*.*`, path.DEST_BUILD, path.VENDOR])
-    .pipe(clean());
-} else {
-  return gulp
-    .src([path.DEST_CSS_MIN, path.DEST_JS_MIN, path.VENDOR])
-    .pipe(clean());
-}
+    return gulp
+      .src([`${path.DEST}/*.*`, path.DEST_BUILD, path.VENDOR])
+      .pipe(clean());
+  } else {
+    return gulp
+      .src([path.DEST_CSS_MIN, path.DEST_JS_MIN, path.VENDOR])
+      .pipe(clean());
+  }
 
 });
 
@@ -110,57 +109,58 @@ gulp.task('copy', () => {
 gulp.task('build', () => {
   var production = process.env.NODE_ENV === 'production';
 
-const vendorBundler = browserify({ debug: !production })
-  .require(vendors);
+  const vendorBundler = browserify({ debug: !production })
+    .require(vendors);
 
 
-let bundler = browserify((path.ENTRY_POINT),
-  {
-    debug: !production,
-    packageCache: {}
-  })
-  .require(require.resolve('./client/app/app.js'), { entry: true })
-  .transform('babelify', {
-    presets: ['es2015', 'react']
-  })
-  .external(vendors);
+  let bundler = browserify((path.ENTRY_POINT),
+    {
+      debug: !production,
+      packageCache: {}
+    })
+    .require(require.resolve('./client/app/app.js'), { entry: true })
+    .transform('babelify', {
+      presets: ['es2015', 'react']
+    })
+    .external(vendors);
 
-let firstBuild = true;
+  let firstBuild = true;
 
-const rebundle = function() {
-  bundler.bundle()
-    .pipe(source('bundle.js'))
-    .pipe(rename('app.js'))
-    .pipe(gulpIf(production, streamify(uglify())))
-    .pipe(gulpIf(production, rename('app.min.js')))
-    .pipe(gulp.dest(path.DEST_BUILD))
-    .on('end', () => {
-    injectFileDependencies();
+  const rebundle = function() {
+    bundler.bundle()
+      .pipe(source('bundle.js'))
+      .pipe(rename('app.js'))
+      .pipe(gulpIf(production, streamify(uglify())))
+      .pipe(gulpIf(production, rename('app.min.js')))
+      .pipe(gulp.dest(path.DEST_BUILD))
+      .on('end', () => {
+        injectFileDependencies();
 
-  if (firstBuild && !production) {
-    startServer();
-    firstBuild = false;
+        if (firstBuild && !production) {
+          startServer();
+          firstBuild = false;
 
-  } else {
-    browserSync.reload();
+        } else {
+          browserSync.reload();
+        }
+      });
+  };
+
+  vendorBundler.bundle()
+    .pipe(source('vendor/vendor.js'))     // something going wrong with the injection of vendor.js into index.html
+                                          // for now just hardcoding the script tag and not allowing it to be minified
+    // .pipe(gulpIf(production, streamify(uglify())))
+    // .pipe(gulpIf(production, rename('vendor/vendor.min.js')))
+    .pipe(gulp.dest(path.DEST));
+
+  if (!production) {
+    bundler = watchify(bundler);
+    bundler.on('update', () => {
+      rebundle();
+    });
   }
-});
-};
 
-vendorBundler.bundle()
-  .pipe(source('vendor/vendor.js'))
-  .pipe(gulpIf(production, streamify(uglify())))
-  .pipe(gulpIf(production, rename('vendor/vendor.min.js')))
-  .pipe(gulp.dest(path.DEST));
-
-if (!production) {
-  bundler = watchify(bundler);
-  bundler.on('update', () => {
-    rebundle();
-});
-}
-
-return rebundle();
+  return rebundle();
 });
 
 
@@ -186,13 +186,13 @@ const startServer = function() {
 
   server.on('start', () => {
     if (!once) {
-    browserSync.init({
-      proxy: 'localhost:3000',
-      port: 4000
-    });
-    once = true;
-  }
-});
+      browserSync.init({
+        proxy: 'localhost:3000',
+        port: 4000
+      });
+      once = true;
+    }
+  });
 
   return server;
 };
@@ -200,7 +200,7 @@ const startServer = function() {
 
 gulp.task('watch', () => {
   gulp.watch(path.SCSS, ['sass']);
-gulp.watch(`${path.DEST_BUILD}/bundle.js`, browserSync.reload());
+  gulp.watch(`${path.DEST_BUILD}/bundle.js`, browserSync.reload());
 });
 
 
@@ -212,8 +212,8 @@ gulp.task('sass', () => {
     .pipe(gulpIf( process.env.NODE_ENV === 'production', rename('styles.min.css')))
     .pipe(gulp.dest(path.DEST))
     .on('end', () => {
-    browserSync.reload();
-});
+      browserSync.reload();
+    });
 });
 
 
@@ -231,7 +231,7 @@ gulp.task('lint', ['uglify'], () => {
     .pipe(eslint.failAfterError());
 });
 
-// run `gulp test` or `npm test` to kick off mocha
+
 gulp.task('test', function () {
   return gulp.src(path.SPEC, { read: false })
     .pipe(mocha({
