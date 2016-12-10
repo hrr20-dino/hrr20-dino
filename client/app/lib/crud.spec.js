@@ -5,7 +5,6 @@ import Crud from './crud';
 import axios from 'axios';
 
 describe('Client Crud Library', function() {
-  const crud = new Crud();
 
   beforeEach(function() {
     sinon.stub(axios, 'get');

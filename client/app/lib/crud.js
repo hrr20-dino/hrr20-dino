@@ -38,32 +38,38 @@ export default class Crud {
   }
 
   post(endpoint, params) {
-    this.axios.post(`/${endpoint}`, params)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    return new Promise((resolve, reject) => {
+      this.axios.post(`/${endpoint}`, params)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   update(endpoint, data, params) {
-    this.axios.put(`/${endpoint}`, data, params)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    return new Promise((resolve, reject) => {
+      this.axios.put(`/${endpoint}`, data, params)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   delete(endpoint, params) {
-    this.axios.delete(`/${endpoint}`, params)
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    return new Promise((resolve, reject) => {
+      this.axios.delete(`/${endpoint}`, params)
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    })
   }
 }
