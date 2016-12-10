@@ -6,7 +6,6 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "gulp",
-    "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash",
     "test": "gulp test"
   },
   "devDependencies": {
