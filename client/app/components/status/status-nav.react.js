@@ -1,12 +1,16 @@
+import React from 'react';
+
 export default class StatusNav extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
 
     };
-  };
-}
+  }
 
-render() {
-
+  render() {
+    return (
+      <div></div>
+    );
+  }
 }
