@@ -12,6 +12,7 @@ class UserStore extends Store {
   constructor() {
     super();
 
+    this.db = new Crud();
     this.users = MockUsers;   // temporary for testing
   }
 
@@ -30,23 +31,22 @@ let userStoreInstance = new UserStore();
 userStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
     case UserConstants.USER_ADD:
-      // add routine
-      Crud.post('/users', { data: action.data })
-        .then((data) => {
-          userStoreInstance.emitChange(data);
-        });
+      userStoreInstance.users.push(action.data);
+      userStoreInstance.emitChange();
+      // userStoreInstance.db.post('/users', { data: action.data })
+      //   .then((data) => {
+      //     userStoreInstance.emitChange(data);
+      //   });
       break;
     case UserConstants.USER_REMOVE:
-      // remove routine
       break;
     case UserConstants.USER_UPDATE:
-      // update routine
       break;
     default:
     // no op
   }
 
-  userStoreInstance.emitChange();    // will this fire too early for async events?
+  // userStoreInstance.emitChange();    // will this fire too early for async events?
 });
 
 export default userStoreInstance;

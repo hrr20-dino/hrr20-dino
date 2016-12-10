@@ -14,7 +14,7 @@ export default class Application extends React.Component {
     this.setState({
       user: UserStore.getUsers()
     });
-    UserStore.addChangeListener(this.onChange);
+    UserStore.addChangeListener(this.onChange.bind(this));
   }
 
   componentWillUnmount() {
@@ -23,7 +23,7 @@ export default class Application extends React.Component {
 
   render() {
     return (
-      <div id='application' onClick={this.handleClick}>
+      <div id='application' onClick={this.handleClick.bind(this)}>
         <ul>
           {this.state.users.map((user) => {
             return (
@@ -43,7 +43,7 @@ export default class Application extends React.Component {
   }
 
   handleClick(e) {
-    UserActions.addUser({
+    UserActions.userAdd({
       name: 'Meriadoc Brandybuck',
       email: 'brandybuxxx@zipmail.net',
       points: 0
