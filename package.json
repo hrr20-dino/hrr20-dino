@@ -4,7 +4,7 @@
   "description": "",
   "author": "hrr20-dino",
   "license": "UNLICENSED",
-  "main": "/server/server.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "gulp",
     "test": "gulp test"
