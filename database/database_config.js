@@ -32,9 +32,9 @@ Routine.hasMany(Task);
 
 //#######################__Sync Tables__##############################
 
-Task.sync().then(console.log('Success!!')).error(console.log('Error creating Task table!'));
-Routine.sync().then(console.log('Success!!')).error(console.log('Error creating Routine table!'));
-User.sync().then(console.log('Success!!')).error(console.log('Error creating User table!'));
+Task.sync().then(console.log('Successfully generated Task table.')).error(console.log('Error creating Task table!'));
+Routine.sync().then(console.log('Successfully generated Routine Table.')).error(console.log('Error creating Routine table!'));
+User.sync().then(console.log('Successfully generated User Table.')).error(console.log('Error creating User table!'));
 
 module.exports = {
   db_connection: db_connection,
