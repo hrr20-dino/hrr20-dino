@@ -2,7 +2,7 @@ import uuid from 'node-uuid';
 
 export default [
   {
-    id: uuid.v4(),
+    id: 1234,
     name: 'Programming',
     description: 'Become a better programmer',
     tasks: [],
@@ -42,23 +42,9 @@ export default [
     ]
   },
   {
-    id: uuid.v4(),
+    id: 5678,
     name: 'Personal',
     description: 'Become a better person',
-    tasks: [
-      {
-        name: 'volunteer',
-        description: 'make myself useful to society'
-      },
-      {
-        name: 'positivity',
-        description: 'focus on what is going right and be thankful for what is going wrong'
-      },
-      {
-        name: 'self-care',
-        description: 'be a better person by improving the body and mind'
-      }
-    ],
     repeat: {
       days: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
     },

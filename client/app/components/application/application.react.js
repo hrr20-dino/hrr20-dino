@@ -1,52 +1,63 @@
 import React from 'react';
-import UserStore from '../../flux/stores/user-store';
-import UserActions from '../../flux/actions/user-actions';
+import RoutineStore from '../../flux/stores/routine-store';
+import RoutineActions from '../../flux/actions/routine-actions';
 
 export default class Application extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: UserStore.getUsers()
+      routines: RoutineStore.getRoutines()
     };
   }
 
   componentDidMount() {
     this.setState({
-      user: UserStore.getUsers()
+      routines: RoutineStore.getRoutines()
     });
-    UserStore.addChangeListener(this.onChange.bind(this));
+    RoutineStore.addChangeListener(this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    UserStore.removeChangeListener(this.onChange);
+    RoutineStore.removeChangeListener(this.onChange);
   }
 
   render() {
     return (
-      <div id='application' onClick={this.handleClick.bind(this)}>
+      <div id='application'>
         <ul>
-          {this.state.users.map((user) => {
+          {this.state.routines.map((routine) => {
             return (
-              <li>{user.name}</li>
+              <li>{routine.name}</li>
             );
           })}
         </ul>
-        <button onClick={this.handleClick.bind(this)}>Add user</button>
+        <button onClick={this.handleClick.bind(this)}>Add routine</button>
       </div>
     );
   }
 
   onChange() {
     this.setState({
-      user: UserStore.getUsers()
+      routines: RoutineStore.getRoutines()
     });
   }
 
   handleClick(e) {
-    UserActions.userAdd({
-      name: 'Meriadoc Brandybuck',
-      email: 'brandybuxxx@zipmail.net',
-      points: 0
+    RoutineActions.routineAdd({
+      name: 'Another routine',
+      description: 'Just another routine to add tasks to',
+      repeat: {
+        days: ['monday', 'friday']
+      },
+      start_time: {
+        hour: 13,
+        minute: 0
+      },
+      end_time: {
+        hour: 14,
+        minute: 30
+      },
+      history: []
     });
   }
 }
