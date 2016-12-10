@@ -6,6 +6,7 @@ import AppDispatcher from '../dispatcher/app-dispatcher';
 import UserConstants from '../constants/user-constants';
 import Store from './store';
 import MockUsers from '../spec/fixtures/mock-user-data';
+import Crud from '../../lib/crud';
 
 class UserStore extends Store {
   constructor() {
@@ -30,6 +31,10 @@ userStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
     case UserConstants.USER_ADD:
       // add routine
+      Crud.post('/users', { data: action.data })
+        .then((data) => {
+          userStoreInstance.emitChange(data);
+        });
       break;
     case UserConstants.USER_REMOVE:
       // remove routine

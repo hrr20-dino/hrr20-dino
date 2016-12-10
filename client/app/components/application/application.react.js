@@ -31,6 +31,7 @@ export default class Application extends React.Component {
             );
           })}
         </ul>
+        <button onClick={this.handleClick.bind(this)}>Add user</button>
       </div>
     );
   }
@@ -42,8 +43,10 @@ export default class Application extends React.Component {
   }
 
   handleClick(e) {
-    // UserActions.update({
-    //   username: 'Robert'
-    // });
+    UserActions.addUser({
+      name: 'Meriadoc Brandybuck',
+      email: 'brandybuxxx@zipmail.net',
+      points: 0
+    });
   }
 }
