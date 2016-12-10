@@ -2,13 +2,6 @@ import AppDispatcher from '../dispatcher/app-dispatcher';
 import TaskConstants from '../constants/task-constants';
 
 export default class TaskActions {
-  taskGet(task) {
-    AppDispatcher.dispatch({
-      actionType: TaskConstants.TASK_GET,
-      data: task
-    });
-  }
-
   taskAdd(task) {
     AppDispatcher.dispatch({
       actionType: TaskConstants.TASK_ADD,

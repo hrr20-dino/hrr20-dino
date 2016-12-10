@@ -9,6 +9,12 @@ import Store from './store';
 class UserStore extends Store {
   constructor() {
     super();
+
+    this.users = {};
+  }
+
+  getUsers(query) {
+    // retrieve user data and cache it in this.users
   }
 }
 
@@ -16,9 +22,6 @@ let userStoreInstance = new UserStore();
 
 userStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
-    case UserConstants.USER_GET:
-      // get routine
-      break;
     case UserConstants.USER_ADD:
       // add routine
       break;

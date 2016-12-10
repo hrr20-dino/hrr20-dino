@@ -9,6 +9,12 @@ import Store from './store';
 class TaskStore extends Store {
   constructor() {
     super();
+
+    this.tasks = {};
+  }
+
+  getTasks(query) {
+    // retrieve from server as requested and store in this.tasks
   }
 }
 
@@ -16,9 +22,6 @@ let taskStoreInstance = new TaskStore();
 
 taskStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
-    case TaskConstants.TASK_GET:
-      // get task
-      break;
     case TaskConstants.TASK_ADD:
       // add task
       break;
