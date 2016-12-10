@@ -28,7 +28,8 @@ const vendors = [
   'react-dom',
   'classnames',
   'keymirror',
-  'flux'
+  'flux',
+  'axios'
 ];
 
 var path = {
