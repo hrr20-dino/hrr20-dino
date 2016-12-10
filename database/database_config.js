@@ -14,15 +14,20 @@ db_connection.sync();
 
 var User = db_connection.define('user', {
   name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}},
-  password: {type: Sequelize.STRING, validate: {notEmpty: true}}
+  password: {type: Sequelize.STRING, validate: {notEmpty: true}},
+  avatar: {type: Sequelize.STRING}
 });
 
 var Routine = db_connection.define('routine', {
-  name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}}
+  name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}},
+  description: {type: Sequelize.TEXT, validate: {notEmpty: true}},
+  repeat: {},
+  time_of_day: {type: Sequelize.TIME}
 });
 
 var Task = db_connection.define('task', {
-  name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}}
+  name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}},
+  description: {type: Sequelize.STRING, validate: {notEmpty: true}}
 });
 
 //#######################__Define Associations__##############################
@@ -33,8 +38,8 @@ Routine.hasMany(Task);
 //#######################__Sync Tables__##############################
 
 Task.sync().then(console.log('Successfully generated Task table.')).error(console.log('Error creating Task table!'));
-Routine.sync().then(console.log('Successfully generated Routine Table.')).error(console.log('Error creating Routine table!'));
-User.sync().then(console.log('Successfully generated User Table.')).error(console.log('Error creating User table!'));
+Routine.sync().then(console.log('Successfully generated Routine table.')).error(console.log('Error creating Routine table!'));
+User.sync().then(console.log('Successfully generated User table.')).error(console.log('Error creating User table!'));
 
 module.exports = {
   db_connection: db_connection,
