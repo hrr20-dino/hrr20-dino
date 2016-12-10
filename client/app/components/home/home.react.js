@@ -1,12 +1,15 @@
+import React from 'react';
+
 export default class Home extends React.Component {
   constrcutor(props) {
-    super(props)
+    super(props);
     this.state = {
 
     };
-  };
-}
-
-render() {
-  
+  }
+  render() {
+    return (
+      <div></div>
+    );
+  }
 }
