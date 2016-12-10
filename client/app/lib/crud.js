@@ -24,15 +24,17 @@ export default class Crud {
   }
 
   get(endpoint, params = { limit: 10, orderBy: 'desc' }) {
-    this.axios.get(`/${endpoint}`, {
-      params: params
-    })
-      .then((res) => {
-        return res;
+    return new Promise((resolve, reject) => {
+      this.axios.get(`/${endpoint}`, {
+        params: params
       })
-      .catch((err) => {
-        console.error(err);
-      });
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   post(endpoint, params) {

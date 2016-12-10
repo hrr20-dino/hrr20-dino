@@ -5,16 +5,22 @@
 import AppDispatcher from '../dispatcher/app-dispatcher';
 import UserConstants from '../constants/user-constants';
 import Store from './store';
+import MockUsers from '../spec/fixtures/mock-user-data';
 
 class UserStore extends Store {
   constructor() {
     super();
 
-    this.users = {};
+    this.users = MockUsers;   // temporary for testing
   }
 
   getUsers(query) {
     // retrieve user data and cache it in this.users
+    if (!query) {
+      return this.users;
+    } else {
+
+    }
   }
 }
 
