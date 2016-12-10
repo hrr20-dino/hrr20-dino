@@ -1,6 +1,10 @@
 import keyMirror from 'keymirror';
 
-module.exports = keyMirror({
+export default keyMirror({
+
+  USER_ADD: null,
+
+  USER_REMOVE: null,
 
   USER_UPDATE: null
 
