@@ -5,3 +5,5 @@ node_modules
 server/dist
 server/db
 npm-debug.log
+.floo
+.flooignore
