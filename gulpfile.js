@@ -26,7 +26,9 @@ const browserSync = require('browser-sync');
 const vendors = [
   'react',
   'react-dom',
-  'classnames'
+  'classnames',
+  'keymirror',
+  'flux'
 ];
 
 var path = {
