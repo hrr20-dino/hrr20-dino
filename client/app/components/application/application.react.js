@@ -1,19 +1,20 @@
 import React from 'react';
-import UserStore from '../stores/user-store';
-import UserActions from '../actions/user-actions';
+import UserStore from '../../flux/stores/user-store';
+import UserActions from '../../flux/actions/user-actions';
 
 export default class Application extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: UserStore.getUser({
-        username: 'Bob'
-      })
+      users: UserStore.getUsers()
     };
   }
 
   componentDidMount() {
-    UserStore.addChangeListener(this.onChange);
+    this.setState({
+      user: UserStore.getUsers()
+    });
+    UserStore.addChangeListener(this.onChange.bind(this));
   }
 
   componentWillUnmount() {
@@ -22,23 +23,30 @@ export default class Application extends React.Component {
 
   render() {
     return (
-      <div id='application' onClick={this.handleClick}>
-        <p>Hello Dino!</p>
+      <div id='application' onClick={this.handleClick.bind(this)}>
+        <ul>
+          {this.state.users.map((user) => {
+            return (
+              <li>{user.name}</li>
+            );
+          })}
+        </ul>
+        <button onClick={this.handleClick.bind(this)}>Add user</button>
       </div>
     );
   }
 
   onChange() {
     this.setState({
-      user: UserStore.getUser({
-        username: 'Bob'
-      })
+      user: UserStore.getUsers()
     });
   }
 
   handleClick(e) {
-    UserActions.update({
-      username: 'Robert'
+    UserActions.userAdd({
+      name: 'Meriadoc Brandybuck',
+      email: 'brandybuxxx@zipmail.net',
+      points: 0
     });
   }
 }
