@@ -36,6 +36,13 @@ Task.sync().then(console.log('Success!!')).error(console.log('Error creating Tas
 Routine.sync().then(console.log('Success!!')).error(console.log('Error creating Routine table!'));
 User.sync().then(console.log('Success!!')).error(console.log('Error creating User table!'));
 
+module.exports = {
+  db_connection: db_connection,
+  User: User,
+  Routine: Routine,
+  Task: Task
+}
+
 
 
 
