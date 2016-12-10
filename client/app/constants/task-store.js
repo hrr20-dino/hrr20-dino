@@ -1,6 +1,6 @@
 import keyMirror from 'keymirror';
 
-module.exports = keyMirror({
+export default keyMirror({
 
   TASK_ADD: null,
 
