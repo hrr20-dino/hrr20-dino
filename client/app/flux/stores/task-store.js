@@ -5,16 +5,27 @@
 import AppDispatcher from '../dispatcher/app-dispatcher';
 import TaskConstants from '../constants/task-constants';
 import Store from './store';
+import Crud from '../../lib/crud';
 
 class TaskStore extends Store {
   constructor() {
     super();
 
+    this.db = new Crud();
+
     this.tasks = {};
   }
 
-  getTasks(query) {
-    // retrieve from server as requested and store in this.tasks
+  getTasks(params = {}) {
+    return new Promise((resolve, reject) => {
+      this.db.get('task', params)
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 }
 
@@ -23,19 +34,27 @@ let taskStoreInstance = new TaskStore();
 taskStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
     case TaskConstants.ADD_TASK:
-      // add task
+      taskStoreInstance.db.post('task', action.data)
+        .then(() => {
+          taskStoreInstance.emitChange();
+        });
       break;
     case TaskConstants.REMOVE_TASK:
-      // remove task
+      taskStoreInstance.db.delete(`task/${action.data}`)
+        .then(() => {
+          taskStoreInstance.emitChange();
+        });
       break;
     case TaskConstants.UPDATE_TASK:
-      // update task
+      taskStoreInstance.db.update(`task/${action.id}`, action.data)
+        .then(() => {
+          taskStoreInstance.emitChange();
+        });
       break;
     default:
     // no op
   }
 
-  taskStoreInstance.emitChange();    // will this fire too early for async events?
 });
 
 export default taskStoreInstance;
