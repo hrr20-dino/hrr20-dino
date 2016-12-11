@@ -2,10 +2,10 @@ import keyMirror from 'keymirror';
 
 export default keyMirror({
 
-  TASK_ADD: null,
+  ADD_TASK: null,
 
-  TASK_REMOVE: null,
+  REMOVE_TASK: null,
 
-  TASK_UPDATE: null
+  UPDATE_TASK: null
 
 });

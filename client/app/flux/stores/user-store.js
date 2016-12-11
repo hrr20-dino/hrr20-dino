@@ -30,7 +30,7 @@ let userStoreInstance = new UserStore();
 
 userStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
-    case UserConstants.USER_ADD:
+    case UserConstants.ADD_USERS:
       userStoreInstance.users.push(action.data);
       userStoreInstance.emitChange();
       // userStoreInstance.db.post('/users', { data: action.data })
@@ -38,9 +38,9 @@ userStoreInstance.dispatchToken = AppDispatcher.register(action => {
       //     userStoreInstance.emitChange(data);
       //   });
       break;
-    case UserConstants.USER_REMOVE:
+    case UserConstants.REMOVE_USER:
       break;
-    case UserConstants.USER_UPDATE:
+    case UserConstants.UPDATE_USER:
       break;
     default:
     // no op
