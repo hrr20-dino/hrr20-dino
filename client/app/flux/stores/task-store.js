@@ -13,7 +13,7 @@ class TaskStore extends Store {
 
     this.db = new Crud();
 
-    this.tasks = {};
+    this.tasks = [];
   }
 
   getTasks(params = {}) {

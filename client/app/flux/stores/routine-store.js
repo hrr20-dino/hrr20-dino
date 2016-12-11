@@ -15,7 +15,7 @@ class RoutineStore extends Store {
 
     this.db = new Crud();
 
-    this.routines = MockRoutines;
+    this.routines = [];
   }
 
   getRoutines(params = {}) {
