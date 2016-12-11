@@ -1,5 +1,3 @@
-import uuid from 'node-uuid';
-
 export default [
   {
     id: 1234,

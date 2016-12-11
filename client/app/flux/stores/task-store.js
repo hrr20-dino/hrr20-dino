@@ -6,26 +6,33 @@ import AppDispatcher from '../dispatcher/app-dispatcher';
 import TaskConstants from '../constants/task-constants';
 import Store from './store';
 import Crud from '../../lib/crud';
+import MockTaskData from '../../flux/spec/fixtures/mock-task-data';
 
 class TaskStore extends Store {
-  constructor() {
+  constructor(options) {
     super();
 
     this.db = new Crud();
 
-    this.tasks = [];
+    this.options = options;
+
+    this.tasks = this.options.mock ? MockTaskData : [];
   }
 
   getTasks(params = {}) {
-    return new Promise((resolve, reject) => {
-      this.db.get('task', params)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    if (this.options) {
+      return this.tasks;
+    } else {
+      return new Promise((resolve, reject) => {
+        this.db.get('task', params)
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    }
   }
 }
 

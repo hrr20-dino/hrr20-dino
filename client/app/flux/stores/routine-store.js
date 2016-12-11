@@ -10,24 +10,30 @@ import Crud from '../../lib/crud';
 
 
 class RoutineStore extends Store {
-  constructor() {
+  constructor(options) {
     super();
+
+    this.options = options;
 
     this.db = new Crud();
 
-    this.routines = [];
+    this.routines = this.options.mock ? MockRoutines : [];
   }
 
   getRoutines(params = {}) {
-    return new Promise((resolve, reject) => {
-      this.db.get('task', params)
-        .then((data) => {
-          resolve(data);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
+    if (this.options.mock) {
+      return this.routines;
+    } else {
+      return new Promise((resolve, reject) => {
+        this.db.get('task', params)
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    }
   }
 }
 
