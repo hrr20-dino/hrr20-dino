@@ -26,14 +26,14 @@ let routineStoreInstance = new RoutineStore();
 
 routineStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
-    case RoutineConstants.ROUTINE_ADD:
+    case RoutineConstants.ADD_ROUTINE:
       routineStoreInstance.routines.push(action.data);
       routineStoreInstance.emitChange();
       break;
-    case RoutineConstants.ROUTINE_REMOVE:
+    case RoutineConstants.REMOVE_ROUTINE:
       // remove routine
       break;
-    case RoutineConstants.ROUTINE_UPDATE:
+    case RoutineConstants.UPDATE_ROUTINE:
       // update routine
       break;
     default:

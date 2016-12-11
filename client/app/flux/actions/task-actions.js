@@ -2,23 +2,23 @@ import AppDispatcher from '../dispatcher/app-dispatcher';
 import TaskConstants from '../constants/task-constants';
 
 export default {
-  taskAdd(task) {
+  addTask(task) {
     AppDispatcher.dispatch({
-      actionType: TaskConstants.TASK_ADD,
+      actionType: TaskConstants.ADD_TASK,
       data: task
     });
   },
 
-  taskRemove(task) {
+  removeTask(task) {
     AppDispatcher.dispatch({
-      actionType: TaskConstants.TASK_REMOVE,
+      actionType: TaskConstants.REMOVE_TASK,
       data: task
     });
   },
 
-  taskUpdate(task) {
+  updateTask(task) {
     AppDispatcher.dispatch({
-      actionType: TaskConstants.TASK_UPDATE,
+      actionType: TaskConstants.UPDATE_TASK,
       data: task
     });
   }

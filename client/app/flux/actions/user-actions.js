@@ -2,23 +2,23 @@ import AppDispatcher from '../dispatcher/app-dispatcher';
 import UserConstants from '../constants/user-constants';
 
 export default {
-  userAdd(user) {
+  addUser(user) {
     AppDispatcher.dispatch({
-      actionType: UserConstants.USER_ADD,
+      actionType: UserConstants.ADD_USER,
       data: user
     });
   },
 
-  userRemove(user) {
+  removeUser(user) {
     AppDispatcher.dispatch({
-      actionType: UserConstants.USER_REMOVE,
+      actionType: UserConstants.REMOVE_USER,
       data: user
     });
   },
 
-  userUpdate(user) {
+  updateUser(user) {
     AppDispatcher.dispatch({
-      actionType: UserConstants.USER_UPDATE,
+      actionType: UserConstants.UPDATE_USER,
       data: user
     });
   }

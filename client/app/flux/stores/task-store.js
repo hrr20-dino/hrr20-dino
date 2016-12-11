@@ -22,13 +22,13 @@ let taskStoreInstance = new TaskStore();
 
 taskStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
-    case TaskConstants.TASK_ADD:
+    case TaskConstants.ADD_TASK:
       // add task
       break;
-    case TaskConstants.TASK_REMOVE:
+    case TaskConstants.REMOVE_TASK:
       // remove task
       break;
-    case TaskConstants.TASK_UPDATE:
+    case TaskConstants.UPDATE_TASK:
       // update task
       break;
     default:
