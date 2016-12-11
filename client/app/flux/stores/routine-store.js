@@ -5,17 +5,20 @@
 import AppDispatcher from '../dispatcher/app-dispatcher';
 import RoutineConstants from '../constants/routine-constants';
 import Store from './store';
+import MockRoutines from '../spec/fixtures/mock-routine-data';
 
 
 class RoutineStore extends Store {
   constructor() {
     super();
 
-    this.routines = {};
+    this.routines = MockRoutines;
   }
 
   getRoutines(query) {
-    // retrieve routines as requested and store them in the cache of this.routines
+    if (!query) {
+      return this.routines;
+    }
   }
 }
 
@@ -24,7 +27,8 @@ let routineStoreInstance = new RoutineStore();
 routineStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
     case RoutineConstants.ROUTINE_ADD:
-      // add routine
+      routineStoreInstance.routines.push(action.data);
+      routineStoreInstance.emitChange();
       break;
     case RoutineConstants.ROUTINE_REMOVE:
       // remove routine
@@ -36,7 +40,7 @@ routineStoreInstance.dispatchToken = AppDispatcher.register(action => {
       // no op
   }
 
-  routineStoreInstance.emitChange();    // will this fire too early for async events?
+  // routineStoreInstance.emitChange();    // will this fire too early for async events?
 });
 
 export default routineStoreInstance;
