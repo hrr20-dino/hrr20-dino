@@ -2,13 +2,11 @@ var Sequelize = require('sequelize');
 
 //#######################__Create Connection__##############################
 
-var db_connection = new Sequelize('app_data', 'root', '', {
+var db_connection = new Sequelize('app_data', /*local_username*/, '', {
   host: 'localhost',
-  dialect: 'mysql',
-  port: 3306
+  dialect: 'postgres',
+  port: /*Environment port*/
 });
-
-db_connection.sync();
 
 //#######################__Define Models__##############################
 
@@ -21,8 +19,8 @@ var User = db_connection.define('user', {
 var Routine = db_connection.define('routine', {
   name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}},
   description: {type: Sequelize.TEXT, validate: {notEmpty: true}},
-  repeat: {},
-  time_of_day: {type: Sequelize.TIME}
+  time_of_day: {type: Sequelize.TIME},
+  repeat: {type: Sequelize.JSON} //this JSON object gets created on the client side
 });
 
 var Task = db_connection.define('task', {
@@ -34,15 +32,15 @@ var Task = db_connection.define('task', {
 
 User.hasMany(Routine);
 Routine.hasMany(Task);
+Task.belongsTo(Routine);
+Routine.belongsTo(User);
 
-//#######################__Sync Tables__##############################
+//#######################__Sync Database and Export__##############################
 
-Task.sync().then(console.log('Successfully generated Task table.')).error(console.log('Error creating Task table!'));
-Routine.sync().then(console.log('Successfully generated Routine table.')).error(console.log('Error creating Routine table!'));
-User.sync().then(console.log('Successfully generated User table.')).error(console.log('Error creating User table!'));
+db_connection.sync();
 
 module.exports = {
-  db_connection: db_connection,
+  connection: db_connection,
   User: User,
   Routine: Routine,
   Task: Task
