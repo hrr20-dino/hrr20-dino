@@ -9,21 +9,26 @@ import Crud from '../../lib/crud';
 import MockTaskData from '../../flux/spec/fixtures/mock-task-data';
 
 class TaskStore extends Store {
-  constructor(options) {
+  constructor() {
     super();
 
     this.db = new Crud();
 
-    this.options = options;
+    this.mock = false;
 
-    this.tasks = this.options.mock ? MockTaskData : [];
+    this.tasks = [];
+  }
+
+  useMockData() {
+    this.mock = true;
+    this.tasks = MockTaskData;
   }
 
   getTasks(params = {}) {
-    if (this.options) {
-      return this.tasks;
-    } else {
-      return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      if (this.mock) {
+        resolve(this.tasks);
+      } else {
         this.db.get('task', params)
           .then((data) => {
             resolve(data);
@@ -31,8 +36,8 @@ class TaskStore extends Store {
           .catch((err) => {
             reject(err);
           });
-      });
-    }
+      }
+    });
   }
 }
 

@@ -9,22 +9,29 @@ import MockUsers from '../spec/fixtures/mock-user-data';
 import Crud from '../../lib/crud';
 
 class UserStore extends Store {
-  constructor(options) {
-    super();
+  constructor(props) {
+    super(props);
 
     this.db = new Crud();
 
-    this.options = options;
+    this.mock = false;
 
-    this.users = this.options.mock? MockUsers : [];
-    this.currentUser = this.options.mock ? this.users[0] : null;
+    this.users = [];
+    this.currentUser = null;
+  }
+
+  useMockData() {
+    this.mock = true;
+    this.users = MockUsers;
+    this.currentUser = this.users[0];
   }
 
   getUsers(params = {}) {
-    if (this.options.mock) {
-      return this.users;
-    } else {
-      return new Promise((resolve, reject) => {
+
+    return new Promise((resolve, reject) => {
+      if (this.mock) {
+        resolve(MockUsers);
+      } else {
         this.db.get('task', params)
           .then((data) => {
             resolve(data);
@@ -32,8 +39,8 @@ class UserStore extends Store {
           .catch((err) => {
             reject(err);
           });
-      });
-    }
+      }
+    });
   }
 
   getCurrentUser() {
