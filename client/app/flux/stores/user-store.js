@@ -9,9 +9,13 @@ import Crud from '../../lib/crud';
 import MockUserData from '../spec/fixtures/mock-user-data';
 import _ from 'lodash';
 
-class UserStore extends Store {
+import EventEmitter from 'events';
+
+const CHANGE_EVENT = 'change';
+
+class UserStore {
   constructor(props) {
-    super(props);
+    // super(props);
 
     this.db = new Crud();
 
@@ -19,6 +23,18 @@ class UserStore extends Store {
 
     this.users = [];
     this.currentUser = null;
+  }
+
+  emitChange() {
+    this.emit(CHANGE_EVENT);
+  }
+
+  addChangeListener(callback) {
+    this.on(CHANGE_EVENT, callback);
+  }
+
+  removeChangeListener(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
   }
 
   useMockData() {

@@ -9,16 +9,31 @@ import Crud from '../../lib/crud';
 import _ from 'lodash';
 import MockRoutineData from '../spec/fixtures/mock-routine-data';
 
+import EventEmitter from 'events';
 
-class RoutineStore extends Store {
+const CHANGE_EVENT = 'change';
+
+class RoutineStore{
   constructor() {
-    super();
+    // super();
 
     this.mock = false;
 
     this.db = new Crud();
 
     this.routines = [];
+  }
+
+  emitChange() {
+    this.emit(CHANGE_EVENT);
+  }
+
+  addChangeListener(callback) {
+    this.on(CHANGE_EVENT, callback);
+  }
+
+  removeChangeListener(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
   }
 
   useMockData() {
