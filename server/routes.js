@@ -5,6 +5,7 @@ const userController = require('./api/user/user.controller.js');
 const routineController = require('./api/routine/routine.controller.js');
 const taskController = require('./api/task/task.controller.js');
 
+
 module.exports = function(app, express) {
   var router = express.Router();
 
@@ -12,33 +13,33 @@ module.exports = function(app, express) {
 
   //all the routes for users
   router.route('/users')
-    .get(userController.function)
-    .post(userController.function);
+    .get(userController.getAllUsers)
+    .post(userController.addUser);
 
   router.route('/users/:users_id')
-    .get(userController.function)
-    .put(userController.function)
-    .delete(userController.function);
+    .get(userController.addUser)
+    .put(userController.updateAUser)
+    .delete(userController.deleteAUser);
 
   //all the routes for routines
   router.route('/routines')
-    .get(routineController.function)
-    .post(routineController.function);
+    .get(routineController.getMyRoutines)
+    .post(routineController.addRoutine);
 
   router.route('/routines/:routines_id')
-    .get(routineController.function)
-    .put(routineController.function)
-    .delete(routineController.function);
+    .get(routineController.getARoutine)
+    .put(routineController.updateARoutine)
+    .delete(routineController.deleteARoutine);
 
   //all the routes for tasks
   router.route('/task')
-    .get(taskController.function)
-    .post(taskController.function);
+    .get(taskController.getAllTasks)
+    .post(taskController.addTask);
 
   router.route('/task/:task_id')
-    .get(taskController.function)
-    .put(taskController.function)
-    .delete(taskController.function);
+    .get(taskController.getATask)
+    .put(taskController.updateATask)
+    .delete(taskController.deleteATask);
 
 
 

@@ -1,15 +1,12 @@
-var Promisify = require('bluebird');
-//var Models = require('/Users/enduser/desktop/hrr/hrr20-dino/database/database_config.js');
-//find a way to make that a better require location. why won't ../../database/database_config.js work?
+const Promisify = require('bluebird');
+const Models = require('../../../database/database_config');
+
 
 module.exports = {
 
-  function: function() {
-    console.log('HELLLLOOO WORLD')
-  },
-
   addTask: function (req, res, next) {
-
+      if (JSON.parse(req.body))
+      var task = req.body
   },
 
   //gets the routines for the specific user
@@ -17,7 +14,7 @@ module.exports = {
 
   },
 
-  getTask: function(req, res, next) {
+  getATask: function(req, res, next) {
     var id = req.params.task_id
     Models.Task.findOne({
       where: {
@@ -25,6 +22,14 @@ module.exports = {
       }
     })
   },
+
+  deleteATask: function(req, res, next) {
+
+  },
+
+  updateATask: function(req, res, next) {
+
+  }
 
 
 }
