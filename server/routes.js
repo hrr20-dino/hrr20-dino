@@ -1,15 +1,13 @@
 'use strict';
 
 const path = require('path');
+const userController = require('./api/user/user.controller.js');
+const routineController = require('./api/routine/routine.controller.js');
+const taskController = require('./api/task/task.controller.js');
 
-module.exports = function(app) {
-  // before these routes will work, need to define module.exports
+module.exports = function(app, express) {
+  var router = express.Router();
 
-<<<<<<< 73bf1f069358bdfa1e6f8ef7a8a487f0fc33f09a
-  // app.use('/api/routine', require('./api/routine'));
-  // app.use('/api/task', require('./api/task'));
-  // app.use('/api/user', require('./api/user'));
-=======
   //controller functions are in the controller.js of each folder in ./api/
 
   //all the routes for users
@@ -43,7 +41,6 @@ module.exports = function(app) {
     .delete(taskController.function);
 
 
->>>>>>> updates
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

@@ -1,5 +1,3 @@
-<<<<<<< 73bf1f069358bdfa1e6f8ef7a8a487f0fc33f09a
-=======
 var Promisify = require('bluebird');
 var Models = require('/Users/enduser/desktop/hrr/hrr20-dino/database/database_config.js');
 //find a way to make that a better require location. why won't ../../database/database_config.js work?
@@ -30,4 +28,3 @@ module.exports = {
 
 
 }
->>>>>>> updates
