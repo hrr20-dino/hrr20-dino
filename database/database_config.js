@@ -7,15 +7,6 @@ var Sequelize = require('sequelize');
 //   dialect: 'postgres',
 //   port: /*Environment port*/
 
-<<<<<<< HEAD
-=======
-// var db_connection = new Sequelize('app_data', /*localhost username*/, '', {
-//   host: 'localhost',
-//   dialect: 'postgres',
-//   port: /* port from postgres gui */
-// });
-
->>>>>>> 44082e9a5539736f0b1cc1c689ca22340b649b4b
 var db_connection = new Sequelize('app_data', 'enduser', '', {
   host: 'localhost',
   dialect: 'postgres',
