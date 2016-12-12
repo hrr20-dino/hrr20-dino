@@ -2,13 +2,18 @@ var Sequelize = require('sequelize');
 
 //#######################__Create Connection__##############################
 
-var db_connection = new Sequelize('app_data', /*local_username*/, '', {
+// var db_connection = new Sequelize('app_data', /*local_username*/, '', {
+//   host: 'localhost',
+//   dialect: 'postgres',
+//   port: /*Environment port*/
+
+var db_connection = new Sequelize('app_data', 'enduser', '', {
   host: 'localhost',
   dialect: 'postgres',
-  port: /*Environment port*/
+  port: 5432
 });
 
-//#######################__Define Models__##############################
+//########################__Define Models__###############################
 
 var User = db_connection.define('user', {
   name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}},
