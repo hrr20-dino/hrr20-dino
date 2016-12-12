@@ -1,5 +1,5 @@
 var Promisify = require('bluebird');
-var Models = require('/Users/enduser/desktop/hrr/hrr20-dino/database/database_config.js');
+//var Models = require('/Users/enduser/desktop/hrr/hrr20-dino/database/database_config.js');
 //un-pseudo line 2 after you've filled in the proper location of database/database_config.js
 //why won't ../../database/database_config.js work?
 
