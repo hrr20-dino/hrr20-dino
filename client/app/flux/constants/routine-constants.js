@@ -2,10 +2,10 @@ import keyMirror from 'keymirror';
 
 export default keyMirror({
 
-  ROUTINE_ADD: null,
+  ADD_ROUTINE: null,
 
-  ROUTINE_REMOVE: null,
+  REMOVE_ROUTINE: null,
 
-  ROUTINE_UPDATE: null
+  UPDATE_ROUTINE: null
 
 });

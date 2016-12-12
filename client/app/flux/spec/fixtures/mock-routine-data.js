@@ -1,5 +1,3 @@
-import uuid from 'node-uuid';
-
 export default [
   {
     id: 1234,
@@ -7,7 +5,13 @@ export default [
     description: 'Become a better programmer',
     tasks: [],
     repeat: {
-      days: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+      monday: true,
+      tuesday: true,
+      wednesday: true,
+      thursday: true,
+      friday: true,
+      saturday: false,
+      sunday: false
     },
     start_time: {
       hour: 22,
@@ -46,7 +50,13 @@ export default [
     name: 'Personal',
     description: 'Become a better person',
     repeat: {
-      days: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+      monday: true,
+      tuesday: true,
+      wednesday: true,
+      thursday: true,
+      friday: true,
+      saturday: false,
+      sunday: false
     },
     start_time: {
       hour: 16,

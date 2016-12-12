@@ -2,24 +2,25 @@ import AppDispatcher from '../dispatcher/app-dispatcher';
 import RoutineConstants from '../constants/routine-constants';
 
 export default {
-  routineAdd(routine) {
+  addRoutine(data) {
     AppDispatcher.dispatch({
-      actionType: RoutineConstants.ROUTINE_ADD,
-      data: routine
+      actionType: RoutineConstants.ADD_ROUTINE,
+      data: data
     });
   },
 
-  routineRemove(routine) {
+  removeRoutine(id) {
     AppDispatcher.dispatch({
-      actionType: RoutineConstants.ROUTINE_REMOVE,
-      data: routine
+      actionType: RoutineConstants.REMOVE_ROUTINE,
+      id: id
     });
   },
 
-  routineUpdate(routine) {
+  updateRoutine(data) {
     AppDispatcher.dispatch({
-      actionType: RoutineConstants.ROUTINE_UPDATE,
-      data: routine
+      actionType: RoutineConstants.UPDATE_ROUTINE,
+      id: data.id,
+      data: data.data
     });
   }
 };

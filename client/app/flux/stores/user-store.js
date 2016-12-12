@@ -5,48 +5,107 @@
 import AppDispatcher from '../dispatcher/app-dispatcher';
 import UserConstants from '../constants/user-constants';
 import Store from './store';
-import MockUsers from '../spec/fixtures/mock-user-data';
 import Crud from '../../lib/crud';
+import MockUserData from '../spec/fixtures/mock-user-data';
+import _ from 'lodash';
 
 class UserStore extends Store {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.db = new Crud();
-    this.users = MockUsers;   // temporary for testing
+
+    this.mock = false;
+
+    this.users = [];
+    this.currentUser = null;
   }
 
-  getUsers(query) {
-    // retrieve user data and cache it in this.users
-    if (!query) {
-      return this.users;
-    } else {
-
-    }
+  useMockData() {
+    this.mock = true;
+    this.users = MockUserData;
+    this.currentUser = this.users[0];
   }
+
+  getUsers(params = {}) {
+
+    return new Promise((resolve, reject) => {
+      if (this.mock) {
+        resolve(this.users);
+      } else {
+        this.db.get('task', params)
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      }
+    });
+  }
+
+  getCurrentUser() {
+    return this.currentUser;
+  }
+
 }
 
 let userStoreInstance = new UserStore();
 
 userStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
-    case UserConstants.USER_ADD:
-      userStoreInstance.users.push(action.data);
-      userStoreInstance.emitChange();
-      // userStoreInstance.db.post('/users', { data: action.data })
-      //   .then((data) => {
-      //     userStoreInstance.emitChange(data);
-      //   });
+    case UserConstants.ADD_USER:
+      if (userStoreInstance.mock) {
+        userStoreInstance.users.push(action.data);
+        userStoreInstance.emitChange();
+      } else {
+        userStoreInstance.db.post('user', action.data)
+          .then(() => {
+            userStoreInstance.emitChange();
+          });
+      }
       break;
-    case UserConstants.USER_REMOVE:
+
+    case UserConstants.REMOVE_USER:
+      if (userStoreInstance.mock) {
+        const userIndex = _.findIndex(userStoreInstance.users, (user) => {
+          return user.id === action.id;
+        });
+
+        if (userIndex !== -1) {
+          userStoreInstance.users.splice(userIndex, 1);
+          userStoreInstance.emitChange();
+        }
+      } else {
+        userStoreInstance.db.delete(`user/${action.data}`)
+          .then(() => {
+            userStoreInstance.emitChange();
+          });
+      }
       break;
-    case UserConstants.USER_UPDATE:
+
+    case UserConstants.UPDATE_USER:
+      if (userStoreInstance.mock) {
+        const userIndex = _.findIndex(userStoreInstance.users, (user) => {
+          return user.id === action.id;
+        });
+        if (userIndex !== -1) {
+          _.assignIn(userStoreInstance.users[userIndex], action.data);
+          userStoreInstance.emitChange();
+        }
+      } else {
+        userStoreInstance.db.update(`user/${action.id}`, action.data)
+          .then(() => {
+            userStoreInstance.emitChange();
+          });
+      }
+
       break;
+
     default:
     // no op
   }
 
-  // userStoreInstance.emitChange();    // will this fire too early for async events?
 });
 
 export default userStoreInstance;

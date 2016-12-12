@@ -5,20 +5,42 @@
 import AppDispatcher from '../dispatcher/app-dispatcher';
 import RoutineConstants from '../constants/routine-constants';
 import Store from './store';
-import MockRoutines from '../spec/fixtures/mock-routine-data';
+import Crud from '../../lib/crud';
+import _ from 'lodash';
+import MockRoutineData from '../spec/fixtures/mock-routine-data';
 
 
 class RoutineStore extends Store {
   constructor() {
     super();
 
-    this.routines = MockRoutines;
+    this.mock = false;
+
+    this.db = new Crud();
+
+    this.routines = [];
   }
 
-  getRoutines(query) {
-    if (!query) {
-      return this.routines;
-    }
+  useMockData() {
+    this.mock = true;
+    this.routines = MockRoutineData;
+  }
+
+  getRoutines(params = {}) {
+
+    return new Promise((resolve, reject) => {
+      if (this.mock) {
+        resolve(this.routines);
+      } else {
+        this.db.get('routine', params)
+          .then((data) => {
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      }
+    });
   }
 }
 
@@ -26,21 +48,58 @@ let routineStoreInstance = new RoutineStore();
 
 routineStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
-    case RoutineConstants.ROUTINE_ADD:
-      routineStoreInstance.routines.push(action.data);
-      routineStoreInstance.emitChange();
+    case RoutineConstants.ADD_ROUTINE:
+      if (routineStoreInstance.mock) {
+        routineStoreInstance.routines.push(action.data);
+        routineStoreInstance.emitChange();
+      } else {
+        routineStoreInstance.db.post('routine', action.data)
+          .then(() => {
+            routineStoreInstance.emitChange();
+          });
+      }
       break;
-    case RoutineConstants.ROUTINE_REMOVE:
-      // remove routine
+
+    case RoutineConstants.REMOVE_ROUTINE:
+      if (routineStoreInstance.mock) {
+        const routineIndex = _.findIndex(routineStoreInstance.routines, (routine) => {
+          return routine.id === action.id;
+        });
+
+        if (routineIndex !== -1) {
+          routineStoreInstance.routines.splice(routineIndex, 1);
+          routineStoreInstance.emitChange();
+        }
+      } else {
+        routineStoreInstance.db.delete(`routine/${action.data}`)
+          .then(() => {
+            routineStoreInstance.emitChange();
+          });
+      }
       break;
-    case RoutineConstants.ROUTINE_UPDATE:
-      // update routine
+
+    case RoutineConstants.UPDATE_ROUTINE:
+      if (routineStoreInstance.mock) {
+        const routineIndex = _.findIndex(routineStoreInstance.routines, (routine) => {
+          return routine.id === action.id;
+        });
+        if (routineIndex !== -1) {
+          _.assignIn(routineStoreInstance.routines[routineIndex], action.data);
+          routineStoreInstance.emitChange();
+        }
+      } else {
+        routineStoreInstance.db.update(`routine/${action.id}`, action.data)
+          .then(() => {
+            routineStoreInstance.emitChange();
+          });
+
+      }
       break;
+
     default:
-      // no op
+    // no op
   }
 
-  // routineStoreInstance.emitChange();    // will this fire too early for async events?
 });
 
 export default routineStoreInstance;
