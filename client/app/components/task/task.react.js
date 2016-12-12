@@ -9,9 +9,7 @@ import TaskNav from './task-nav.react.js';
 import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Launch from 'material-ui/svg-icons/file/launch';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Launch from 'material-ui/svg-icons/action/launch';
 
 export default class Task extends React.Component {
   constructor(props) {
