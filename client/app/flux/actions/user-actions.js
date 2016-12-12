@@ -16,11 +16,11 @@ export default {
     });
   },
 
-  updateUser(id, data) {
+  updateUser(data) {
     AppDispatcher.dispatch({
       actionType: UserConstants.UPDATE_USER,
-      id: id,
-      data: data
+      id: data.id,
+      data: data.data
     });
   }
 };

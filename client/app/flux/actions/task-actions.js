@@ -16,11 +16,11 @@ export default {
     });
   },
 
-  updateTask(id, data) {
+  updateTask(data) {
     AppDispatcher.dispatch({
       actionType: TaskConstants.UPDATE_TASK,
-      id: id,
-      data: data
+      id: data.id,
+      data: data.data
     });
   }
 };

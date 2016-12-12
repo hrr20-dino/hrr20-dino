@@ -16,11 +16,11 @@ export default {
     });
   },
 
-  updateRoutine(id, data) {
+  updateRoutine(data) {
     AppDispatcher.dispatch({
       actionType: RoutineConstants.UPDATE_ROUTINE,
-      id: id,
-      data: data
+      id: data.id,
+      data: data.data
     });
   }
 };

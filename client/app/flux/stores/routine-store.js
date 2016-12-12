@@ -5,8 +5,9 @@
 import AppDispatcher from '../dispatcher/app-dispatcher';
 import RoutineConstants from '../constants/routine-constants';
 import Store from './store';
-import MockRoutines from '../spec/fixtures/mock-routine-data';
 import Crud from '../../lib/crud';
+import _ from 'lodash';
+import MockRoutineData from '../spec/fixtures/mock-routine-data';
 
 
 class RoutineStore extends Store {
@@ -22,7 +23,7 @@ class RoutineStore extends Store {
 
   useMockData() {
     this.mock = true;
-    this.routines = MockRoutines;
+    this.routines = MockRoutineData;
   }
 
   getRoutines(params = {}) {
@@ -31,7 +32,7 @@ class RoutineStore extends Store {
       if (this.mock) {
         resolve(this.routines);
       } else {
-        this.db.get('task', params)
+        this.db.get('routine', params)
           .then((data) => {
             resolve(data);
           })
@@ -47,27 +48,58 @@ let routineStoreInstance = new RoutineStore();
 
 routineStoreInstance.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
-    case RoutineConstants.ADD_TASK:
-      routineStoreInstance.db.post('routine', action.data)
-        .then(() => {
-          routineStoreInstance.emitChange();
-        });
+    case RoutineConstants.ADD_ROUTINE:
+      if (routineStoreInstance.mock) {
+        routineStoreInstance.routines.push(action.data);
+        routineStoreInstance.emitChange();
+      } else {
+        routineStoreInstance.db.post('routine', action.data)
+          .then(() => {
+            routineStoreInstance.emitChange();
+          });
+      }
       break;
-    case RoutineConstants.REMOVE_TASK:
-      routineStoreInstance.db.delete(`routine/${action.data}`)
-        .then(() => {
-          routineStoreInstance.emitChange();
+
+    case RoutineConstants.REMOVE_ROUTINE:
+      if (routineStoreInstance.mock) {
+        const routineIndex = _.findIndex(routineStoreInstance.routines, (routine) => {
+          return routine.id === action.id;
         });
-      break;
-    case RoutineConstants.UPDATE_TASK:
-      routineStoreInstance.db.update(`routine/${action.id}`, action.data)
-        .then(() => {
+
+        if (routineIndex !== -1) {
+          routineStoreInstance.routines.splice(routineIndex, 1);
           routineStoreInstance.emitChange();
-        });
+        }
+      } else {
+        routineStoreInstance.db.delete(`routine/${action.data}`)
+          .then(() => {
+            routineStoreInstance.emitChange();
+          });
+      }
       break;
+
+    case RoutineConstants.UPDATE_ROUTINE:
+      if (routineStoreInstance.mock) {
+        const routineIndex = _.findIndex(routineStoreInstance.routines, (routine) => {
+          return routine.id === action.id;
+        });
+        if (routineIndex !== -1) {
+          _.assignIn(routineStoreInstance.routines[routineIndex], action.data);
+          routineStoreInstance.emitChange();
+        }
+      } else {
+        routineStoreInstance.db.update(`routine/${action.id}`, action.data)
+          .then(() => {
+            routineStoreInstance.emitChange();
+          });
+
+      }
+      break;
+
     default:
     // no op
   }
+
 });
 
 export default routineStoreInstance;
