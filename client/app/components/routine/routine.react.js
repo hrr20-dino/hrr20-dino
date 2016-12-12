@@ -1,12 +1,9 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RoutineNav from './routine-nav.react.js';
 import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Launch from 'material-ui/svg-icons/file/launch';
-
 
 export default class Routine extends React.Component {
   constructor(props) {
@@ -17,19 +14,33 @@ export default class Routine extends React.Component {
   }
 
   render() {
+    const paperStyle = {
+      height: 600,
+      width: 600,
+      margin: 20,
+    };
+    const centerPaper = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    };
     return (
       <div>
         <RoutineNav />
-        <Paper style={} zDepth={4} />
-          <List>
-            // for each task in routine
-            <Divider />
-            <ListItem
-              primaryText={}
-              rightIcon={<Launch onClick={} />}
-            />
-          </List>
-        <Paper />
+        <div style={centerPaper}>
+          <div>
+            <Paper style={paperStyle} zDepth={4}>
+              <List>
+                {/*for each task in routine*/}
+                <ListItem
+                  primaryText="Test"
+                  rightIcon={<Launch />}
+                />
+              </List>
+              <Divider />
+            </Paper>
+          </div>
+        </div>
       </div>
     );
   }
