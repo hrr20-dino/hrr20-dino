@@ -3,7 +3,7 @@ import RoutineNav from './routine-nav.react.js';
 import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Launch from 'material-ui/svg-icons/file/launch';
+import Launch from 'material-ui/svg-icons/action/launch';
 
 export default class Routine extends React.Component {
   constructor(props) {

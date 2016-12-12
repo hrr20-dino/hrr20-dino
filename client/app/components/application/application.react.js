@@ -1,6 +1,7 @@
 import React from 'react';
 import TestComponent from './test-component.react';
 import PreAuthNav from '../routine/pre-auth-nav.react';
+import Routine from '../routine/routine.react';
 
 export default class Application extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class Application extends React.Component {
       <div id='application'>
         {/*<PreAuthNav />*/}
         <TestComponent />
+        <Routine />
       </div>
     );
   }
