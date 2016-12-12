@@ -1,5 +1,15 @@
 /**
- *      superclass for other stores
+ *      *** store.js ***
+ *
+ *      A superclass for other stores.
+ *
+ *      Each store has a `data` object which can be used for whatever.
+ *      It also has an array called `collection` that is what the standard `get`, `add`, `update` and `remove`
+ *      methods operate on by default.
+ *
+ *      To instantiate a subclass, call `super` in your store's constructor, passing in an object that contains
+ *      a string for the key `storeName`.  It should correspond to your server API's endpoint.
+ *
  */
 
 
@@ -56,7 +66,7 @@ class Store extends EventEmitter {
     });
   }
 
-  add(data) {
+  _add(data) {
     if (this.mock) {
       this.data.collection.push(data);
       this.emitChange();
@@ -68,7 +78,7 @@ class Store extends EventEmitter {
     }
   }
 
-  update(id, data) {
+  _update(id, data) {
     if (this.mock) {
       const index = _.findIndex(this.data.collection, { id: id });
       if (index !== -1) {
@@ -83,7 +93,7 @@ class Store extends EventEmitter {
     }
   }
 
-  remove(id) {
+  _remove(id) {
     if (this.mock) {
       const index = _.findIndex(this.data.collection, { id: id });
       if (index !== -1) {

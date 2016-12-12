@@ -13,7 +13,6 @@ class TaskStore extends Store {
       storeName: 'task'
     });
 
-    this.data.tasks = [];
   }
 }
 
@@ -22,15 +21,15 @@ let that = new TaskStore();
 that.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
     case TaskConstants.ADD_TASK:
-      that.add(action.data);
+      that._add(action.data);
       break;
 
     case TaskConstants.UPDATE_TASK:
-      that.update(action.id, action.newData);
+      that._update(action.id, action.newData);
       break;
 
     case TaskConstants.REMOVE_TASK:
-      that.remove(action.id);
+      that._remove(action.id);
       break;
 
     default:

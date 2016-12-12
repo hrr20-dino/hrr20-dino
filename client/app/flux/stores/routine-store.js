@@ -5,110 +5,30 @@
 import AppDispatcher from '../dispatcher/app-dispatcher';
 import RoutineConstants from '../constants/routine-constants';
 import Store from './store';
-import Crud from '../../lib/crud';
-import _ from 'lodash';
-import MockRoutineData from '../spec/fixtures/mock-routine-data';
 
-import EventEmitter from 'events';
-
-const CHANGE_EVENT = 'change';
-
-class RoutineStore{
+class RoutineStore extends Store {
   constructor() {
-    // super();
-
-    this.mock = false;
-
-    this.db = new Crud();
-
-    this.routines = [];
-  }
-
-  emitChange() {
-    this.emit(CHANGE_EVENT);
-  }
-
-  addChangeListener(callback) {
-    this.on(CHANGE_EVENT, callback);
-  }
-
-  removeChangeListener(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  }
-
-  useMockData() {
-    this.mock = true;
-    this.routines = MockRoutineData;
-  }
-
-  getRoutines(params = {}) {
-
-    return new Promise((resolve, reject) => {
-      if (this.mock) {
-        resolve(this.routines);
-      } else {
-        this.db.get('routine', params)
-          .then((data) => {
-            resolve(data);
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      }
+    super({
+      storeName: 'routine'
     });
+
   }
 }
 
-let routineStoreInstance = new RoutineStore();
+let that = new RoutineStore();
 
-routineStoreInstance.dispatchToken = AppDispatcher.register(action => {
+that.dispatchToken = AppDispatcher.register(action => {
   switch (action.actionType) {
     case RoutineConstants.ADD_ROUTINE:
-      if (routineStoreInstance.mock) {
-        routineStoreInstance.routines.push(action.data);
-        routineStoreInstance.emitChange();
-      } else {
-        routineStoreInstance.db.post('routine', action.data)
-          .then(() => {
-            routineStoreInstance.emitChange();
-          });
-      }
-      break;
-
-    case RoutineConstants.REMOVE_ROUTINE:
-      if (routineStoreInstance.mock) {
-        const routineIndex = _.findIndex(routineStoreInstance.routines, (routine) => {
-          return routine.id === action.id;
-        });
-
-        if (routineIndex !== -1) {
-          routineStoreInstance.routines.splice(routineIndex, 1);
-          routineStoreInstance.emitChange();
-        }
-      } else {
-        routineStoreInstance.db.delete(`routine/${action.data}`)
-          .then(() => {
-            routineStoreInstance.emitChange();
-          });
-      }
+      that._add(action.data);
       break;
 
     case RoutineConstants.UPDATE_ROUTINE:
-      if (routineStoreInstance.mock) {
-        const routineIndex = _.findIndex(routineStoreInstance.routines, (routine) => {
-          return routine.id === action.id;
-        });
-        if (routineIndex !== -1) {
-          _.assignIn(routineStoreInstance.routines[routineIndex], action.data);
-          routineStoreInstance.emitChange();
-        }
-      } else {
-        routineStoreInstance.db.update(`routine/${action.id}`, action.data)
-          .then(() => {
-            routineStoreInstance.emitChange();
-          });
+      that._update(action.id, action.newData);
+      break;
 
-      }
+    case RoutineConstants.REMOVE_ROUTINE:
+      that._remove(action.id);
       break;
 
     default:
@@ -117,4 +37,4 @@ routineStoreInstance.dispatchToken = AppDispatcher.register(action => {
 
 });
 
-export default routineStoreInstance;
+export default that;
