@@ -40,38 +40,38 @@ export default class TestComponent extends React.Component {
           })
         }
         </ul>
-        <button onClick={this.add}>Add User</button>
+        <button onClick={this.add}>Add user</button>
       </div>
     );
   }
 
   getData() {
     UserStore
-      .getUsers()
-      .then((users) => {
+      .get()
+      .then((data) => {
         this.setState({
-          users: users,
-          currentUser: UserStore.getCurrentUser()
+          users: data.collection,
+          currentUser: data.currentUser
         });
       });
   }
 
   add() {
-    UserActions.addUser({
+    UserActions.add({
       id: uuid.v4(),
-      name: 'Gandalf the Grey'
+      name: 'Richard'
     });
   }
 
   remove(id) {
-    UserActions.removeUser(id);
+    UserActions.remove(id);
   }
 
   update(id) {
-    UserActions.updateUser({
+    UserActions.update({
       id: id,
-      data: {
-        name: 'Gandalf the White'
+      newData: {
+        name: 'Dick'
       }
     });
   }
