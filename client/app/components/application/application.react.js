@@ -1,6 +1,6 @@
 import React from 'react';
-// import SideMenu from '../../components/side-menu/side-menu.react';
 import TestComponent from './test-component.react';
+import PreAuthNav from '../routine/pre-auth-nav.react';
 
 export default class Application extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ export default class Application extends React.Component {
   render() {
     return (
       <div id='application'>
-        {/*<SideMenu />*/}
+        {/*<PreAuthNav />*/}
         <TestComponent />
       </div>
     );

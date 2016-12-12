@@ -20,7 +20,7 @@ export default class SideMenu extends React.Component {
       <div>
         <Drawer
           open={true} >
-          <div>user</div>
+          <div>Test User</div>
           <Menu>
             <MenuItem
               primaryText="My Routines"

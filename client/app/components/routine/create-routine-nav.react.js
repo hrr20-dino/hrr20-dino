@@ -1,10 +1,9 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import RaisedButton from 'material-ui/RaisedButton';
-import AddCircleOutline from 'material-ui/svg-icons/file/add-circle-outline';
-import ArrowBack from 'material-ui/svg-icons/file/arrow-back';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import RaisedButton from 'material-ui/RaisedButton';
+import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
+
 
 export default class CreateRoutineNav extends React.Component {
   constructor(props) {
@@ -15,22 +14,30 @@ export default class CreateRoutineNav extends React.Component {
   }
 
   render() {
+    const logoStyle = {
+      fontWeight: 'bold',
+      fontSize: 28
+    };
+    const titleStyle = {
+      fontSize: 28
+    };
     return (
       <div>
         <Toolbar>
           <ToolbarGroup firstChild={true}>
-            <ArrowBack
-              onClick={}
-              />
-            <ToolbarTitle className="" text="Create Routine" />
+            <ToolbarTitle style={logoStyle} text="Team Dino" />
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
+            {/* insert onClick/onTapTouch to ArrowBack */}
+            <ArrowBack />
+            <div style={titleStyle}>Create Routine</div>
+            <ToolbarSeparator />
+            {/* insert onClick/onTapTouch to RaisedButton */}
             <RaisedButton
-              onClick={}
-              label="Add Routine"
+              label="Logout"
               labelPosition="before"
               primary={true}
-              icon={<AddCircleOutline />}
+              icon={<PowerSettingsNew />}
               />
           </ToolbarGroup>
         </Toolbar>
