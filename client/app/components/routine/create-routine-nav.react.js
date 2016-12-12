@@ -3,6 +3,9 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
+import IconButton from 'material-ui/IconButton';
+import Reorder from 'material-ui/svg-icons/action/reorder';
+
 
 
 export default class CreateRoutineNav extends React.Component {
@@ -25,6 +28,10 @@ export default class CreateRoutineNav extends React.Component {
       <div>
         <Toolbar>
           <ToolbarGroup firstChild={true}>
+            {/* handle reorder href to open SideMenu */}
+            <IconButton>
+              <Reorder />
+            </IconButton>
             <ToolbarTitle style={logoStyle} text="Team Dino" />
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>

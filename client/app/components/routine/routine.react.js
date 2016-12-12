@@ -33,6 +33,7 @@ export default class Routine extends React.Component {
               <List>
                 {/*for each task in routine*/}
                 <ListItem
+                  {/* add specifc routine name within primaryText */}
                   primaryText="Test"
                   rightIcon={<Launch />}
                 />
