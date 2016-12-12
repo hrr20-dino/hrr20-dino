@@ -1,12 +1,13 @@
 var Promisify = require('bluebird');
-var Models = require('../../database_config.js');
+var Models = require('/Users/enduser/desktop/hrr/hrr20-dino/database/database_config.js');
 
 module.exports = {
+  function: function() {
+    console.log('HELLLLOOO WORLD')
+  },
+
   addRoutine: function (req, res, next) {
 
-<<<<<<< 73bf1f069358bdfa1e6f8ef7a8a487f0fc33f09a
-  }
-=======
   },
 
   //gets the routines for the specific user
@@ -14,6 +15,4 @@ module.exports = {
 
   },
 
-
->>>>>>> updates
 }

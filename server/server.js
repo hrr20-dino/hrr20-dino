@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 // do all that app.set, app.use, etc in ./config/express.js
 
 require('./config/express')(app);
-require('./routes')(app);
+require('./routes')(app, express);
 
 const server = require('http').createServer(app);
 
