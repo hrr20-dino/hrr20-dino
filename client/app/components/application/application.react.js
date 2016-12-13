@@ -15,6 +15,10 @@ import UserStore from '../../flux/stores/user-store';
 import RoutineStore from '../../flux/stores/routine-store';
 import TaskStore from '../../flux/stores/task-store';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Theme from '../theme/theme.js';
+
 UserStore.useMockData();
 RoutineStore.useMockData();
 TaskStore.useMockData();
@@ -89,10 +93,11 @@ export default class Application extends React.Component {
   render() {
 
     return (
-      <div id='application'>
-        <MyRoutines routines={this.state.routines}
-                    tasks={this.state.tasks}
-        />
+      <div id='application'>router-and-components
+        <MuiThemeProvider muiTheme={getMuiTheme(Theme)} >
+           <MyRoutines routines={this.state.routines}
+                    tasks={this.state.tasks} />
+        </MuiThemeProvider>
       </div>
     );
   }
