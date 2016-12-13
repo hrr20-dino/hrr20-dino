@@ -25,8 +25,6 @@ const browserSync = require('browser-sync');
 // The following NPM packages will be bundled into vendors.js or vendors.min.js,
 // separate from custom code in app.js or app.min.js
 const vendors = [
-  'react',
-  'react-dom',
   'classnames',
   'keymirror',
   'flux',
