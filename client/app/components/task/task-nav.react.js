@@ -37,14 +37,6 @@ export default class TaskNav extends React.Component {
             {/* insert onClick/onTapTouch to ArrowBack */}
             <ArrowBack
               />
-            <ToolbarTitle style={titleStyle} text="My Task" />
-            {/* insert onClick/onTapTouch to RaisedButton */}
-            <RaisedButton
-              label="Create Task"
-              labelPosition="before"
-              primary={true}
-              icon={<AddCircleOutline />}
-              />
             <ToolbarSeparator />
             {/* insert onClick/onTapTouch to RaisedButton */}
             <RaisedButton

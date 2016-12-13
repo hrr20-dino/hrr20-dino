@@ -10,7 +10,8 @@ import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Launch from 'material-ui/svg-icons/action/launch';
-import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 export default class Task extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export default class Task extends React.Component {
 
   render() {
     const paperStyle = {
-      height: 125,
+      height: 190,
       width: 400,
       margin: 15,
     };
@@ -34,17 +35,29 @@ export default class Task extends React.Component {
     const textFieldStyle = {
       margin: 25
     };
+    const taskStyle = {
+      padding: 5,
+      marginLeft: 17,
+      marginRight: 17
+    };
+    const navClose = {
+      marginLeft: 10,
+      marginTop: 10
+    };
+
     return (
       <div>
         <TaskNav />
         <div style={centerPaper}>
           <div>
             <Paper style={paperStyle} zDepth={4}>
-              <TextField
-                style={textFieldStyle}
-                defaultValue="4 minute jog intervals with 1 minute rest periods along the San Fran Bay"
-                floatingLabelText="Jog 2 Miles"
-                />
+            <div>
+              <NavigationClose style={navClose}/>
+            </div>
+            <div style={taskStyle}>
+              <h3>Jog 2 Miles</h3>
+              4 minute intervals with 1 minute rest periods along the San Fran Bay
+            </div>
             </Paper>
           </div>
         </div>
