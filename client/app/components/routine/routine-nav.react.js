@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
 import IconButton from 'material-ui/IconButton';
 import Reorder from 'material-ui/svg-icons/action/reorder';
-
+import * as Colors from 'material-ui/styles/colors';
 
 export default class Routine extends React.Component {
   constructor(props) {
@@ -19,10 +19,12 @@ export default class Routine extends React.Component {
   render() {
     const logoStyle = {
       fontWeight: 'bold',
-      fontSize: 28
+      fontSize: 24,
+      colors: Colors.white
     };
     const titleStyle = {
-      fontSize: 28
+      fontSize: 24,
+      colors: Colors.white
     };
     return (
       <div>

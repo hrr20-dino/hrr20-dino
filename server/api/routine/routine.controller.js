@@ -3,7 +3,7 @@ const Models = require('../../../database/database_config');
 
 module.exports = {
   //Adds a user's routine to the Routine table
-  addRoutine: function (req, res, next) {
+  addARoutine: function (req, res, next) {
     Models.Routine.build({
       name: req.body.name,
       description: req.body.description,

@@ -17,7 +17,7 @@ var test_routine = database.Routine.build({
   end_time: '13:00:00',
   repeat: '{"Sunday": true, "Monday": false, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": false}',
   completed: true,
-  userName: 'Sir Testburg'
+  userId: 1
 });
 
 test_routine.save().catch(function(error){
@@ -27,7 +27,7 @@ test_routine.save().catch(function(error){
 var test_task = database.Task.build({
   name: 'Get on horse',
   description: 'Prepare for jousting by getting on horse',
-  routineName: 'Joust'
+  routineId: 1
 });
 
 test_task.save().catch(function(error){
@@ -37,8 +37,8 @@ test_task.save().catch(function(error){
 var test_history = database.History.build({
   date: '2016-12-11',
   completed: true,
-  userName: 'Sir Testburg',
-  routineName: 'Joust'
+  userId: 1,
+  routineId: 1
 });
 
 test_history.save().catch(function(error){

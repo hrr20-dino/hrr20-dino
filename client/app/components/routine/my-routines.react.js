@@ -21,7 +21,6 @@ export default class MyRoutines extends React.Component {
     super(props);
 
     this.state = {
-      visible: true
     };
   }
 
@@ -41,6 +40,7 @@ export default class MyRoutines extends React.Component {
       height: 400,
       width: 300,
       margin: 30,
+      overflow: 'auto'
     };
 
     return (
