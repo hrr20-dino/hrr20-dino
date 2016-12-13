@@ -1,4 +1,4 @@
-const Promisify = require('bluebird');
+const Promise = require('bluebird');
 const Models = require('../../../database/database_config');
 
 module.exports = {
