@@ -2,10 +2,10 @@ var Sequelize = require('sequelize');
 
 //#######################__Create Connection__##############################
 
-var db_connection = new Sequelize('app_data', 'enduser', '', {
+var db_connection = new Sequelize('app_data', /*local user*/, '', {
   host: 'localhost',
   dialect: 'postgres',
-  port: 5432
+  port: /*postgres port*/
 });
 
 //########################__Define Models__###############################
