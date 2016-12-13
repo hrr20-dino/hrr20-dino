@@ -4,6 +4,9 @@ import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Launch from 'material-ui/svg-icons/action/launch';
+import IconButton from 'material-ui/IconButton';
+import Checkbox from 'material-ui/Checkbox';
+
 
 export default class Routine extends React.Component {
   constructor(props) {
@@ -24,6 +27,12 @@ export default class Routine extends React.Component {
       alignItems: 'center',
       justifyContent: 'center'
     };
+    const launchTask = (
+      <IconButton>
+        <Launch />
+      </IconButton>
+    );
+
     return (
       <div>
         <RoutineNav />
@@ -32,10 +41,11 @@ export default class Routine extends React.Component {
             <Paper style={paperStyle} zDepth={4}>
               <List>
                 {/*for each task in routine*/}
+                {/* add specifc routine name within primaryText */}
                 <ListItem
-                  {/* add specifc routine name within primaryText */}
                   primaryText="Test"
-                  rightIcon={<Launch />}
+                  leftCheckbox={<Checkbox />}
+                  rightIconButton={launchTask}
                 />
               </List>
               <Divider />

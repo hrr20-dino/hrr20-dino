@@ -1,8 +1,11 @@
 import React from 'react';
-import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import RaisedButton from 'material-ui/RaisedButton';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
+import IconButton from 'material-ui/IconButton';
+import Reorder from 'material-ui/svg-icons/action/reorder';
 
 
 export default class Routine extends React.Component {
@@ -25,12 +28,25 @@ export default class Routine extends React.Component {
       <div>
         <Toolbar>
           <ToolbarGroup firstChild={true}>
+            {/* handle reorder href to open SideMenu */}
+            <IconButton>
+              <Reorder />
+            </IconButton>
             <ToolbarTitle style={logoStyle} text="Team Dino" />
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
             {/* insert onClick/onTapTouch to ArrowBack */}
-            <ArrowBack />
-            <div style={titleStyle}>Routine</div>
+            <ArrowBack
+              />
+            {/* insert Routine name in text */}
+            <ToolbarTitle style={titleStyle} text="Routine" />
+            {/* insert onClick/onTapTouch to RaisedButton */}
+            <RaisedButton
+              label="Create Task"
+              labelPosition="before"
+              primary={true}
+              icon={<AddCircleOutline />}
+              />
             <ToolbarSeparator />
             {/* insert onClick/onTapTouch to RaisedButton */}
             <RaisedButton
