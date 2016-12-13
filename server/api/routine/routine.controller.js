@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 const Models = require('../../../database/database_config');
 
 module.exports = {
-
+  //Adds a user's routine to the Routine table
   addRoutine: function (req, res, next) {
     Models.Routine.build({
       name: req.body.name,
@@ -20,11 +20,11 @@ module.exports = {
     })
   },
 
-  //gets the routines for the current user
+  //Gets the routines for the current user
   getMyRoutines: function(req, res, next) {
     Models.Routine.findAll({
       where: {
-        userName: req.params.userName
+        userId: req.params.userId
       }
     })
     .then(function(routines){
@@ -35,11 +35,12 @@ module.exports = {
     });
   },
 
+  //Gets a single routine for a user
   getARoutine: function(req, res, next) {
     Models.Routine.findAll({
       where: {
-        name: req.params.routineName,
-        userName: req.params.userName
+        id: req.params.routineId,
+        userId: req.params.userId
       }
     })
     .then(function(routine){
@@ -51,11 +52,12 @@ module.exports = {
     });
   },
 
+  //Deletes a user's routine from the Routine table
   deleteARoutine: function(req, res, next) {
     Models.Routine.destroy({
       where: {
-        name: req.params.routineName,
-        userName: req.params.userName
+        id: req.params.routineId,
+        userId: req.params.userId
       }
     })
     .then(function() {
