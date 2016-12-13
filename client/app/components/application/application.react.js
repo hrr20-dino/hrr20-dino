@@ -11,10 +11,6 @@ import UserStore from '../../flux/stores/user-store';
 import RoutineStore from '../../flux/stores/routine-store';
 import TaskStore from '../../flux/stores/task-store';
 
-UserStore.useMockData();
-RoutineStore.useMockData();
-TaskStore.useMockData();
-
 export default class Application extends React.Component {
   constructor(props) {
     super(props);
@@ -78,7 +74,7 @@ export default class Application extends React.Component {
   render() {
     return (
       <div id='application'>
-        <MyRoutines routine={this.state.routines} />
+        <MyRoutines routines={this.state.routines} tasks={this.state.tasks} />
       </div>
     );
   }
