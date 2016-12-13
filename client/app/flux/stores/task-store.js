@@ -10,7 +10,7 @@ import Store from './store';
 class TaskStore extends Store {
   constructor() {
     super({
-      storeName: 'task'
+      storeName: 'tasks'
     });
 
   }

@@ -74,7 +74,7 @@ export default class Crud {
     });
   }
 
-  delete(endpoint, id) {
+  remove(endpoint, id) {
     return new Promise((resolve, reject) => {
       this.axios.delete(`/${endpoint}/${this.currentUser.id}`, id)
         .then((res) => {

@@ -17,6 +17,7 @@ const rename = require('gulp-rename');
 const mocha = require('gulp-mocha');
 const nodemon = require('gulp-nodemon');
 const series = require('stream-series');
+const gutil = require('gulp-util');
 const nodePath = require('path');
 const browserSync = require('browser-sync');
 
@@ -131,6 +132,7 @@ gulp.task('build', () => {
 
   const rebundle = function() {
     bundler.bundle()
+      .on('error', gutil.log.bind(gutil, 'Browserify error'))
       .pipe(source('bundle.js'))
       .pipe(rename('app.js'))
       .pipe(gulpIf(production, streamify(uglify())))

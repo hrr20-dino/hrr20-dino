@@ -101,7 +101,7 @@ class Store extends EventEmitter {
         this.emitChange();
       }
     } else {
-      this.db.delete(`${this.storeName}/${id}`)
+      this.db.remove(`${this.storeName}/${id}`)
         .then(() => {
           this.emitChange();
         });
