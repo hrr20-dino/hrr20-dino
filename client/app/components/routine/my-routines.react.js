@@ -8,14 +8,37 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import RoutineStore from '../../flux/stores/routine-store';
+
+RoutineStore.useMockData();
 
 
 export default class MyRoutines extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      routines: []
     };
+  }
+
+  componentDidMount() {
+    this.getRoutines();
+
+    RoutineStore.addChangeListener(this.getRoutines);
+  }
+
+  componentWillUnmount() {
+    RoutineStore.removeChangeListener(this.getRoutines);
+  }
+
+  getRoutines() {
+    RoutineStore
+      .get()
+      .then((data) => {
+        this.setState({
+          routines: data.collection
+        });
+      });
   }
 
   render() {
@@ -29,43 +52,28 @@ export default class MyRoutines extends React.Component {
       <div>
         <MyRoutinesNav />
         {/*map over user routine data to create card routine for each routine */}
-        <Paper style={paperStyle} zDepth={4}>
-          {/* insert onTapTouch for FlatButton */}
-          <AppBar
-            title="Morning Workout"
-            titleStyle={{fontSize: 18}}
-            iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-            iconElementRight={<IconButton><Launch /></IconButton>}
-          />
-          <List>
-            {/*for each task in routine */}
-            <Divider />
-            {/* insert onTapTouch for ListItem */}
-            <ListItem
-              primaryText="Jog 2 miles"
-              rightIcon={<Launch />}
-            />
-          </List>
-        </Paper>
-        {/* Additional Hardcoded Routine for testing. Get rid of when wiring to routine data. */}
-        <Paper style={paperStyle} zDepth={4}>
-          {/* insert onTapTouch for FlatButton */}
-          <AppBar
-            title="Breakfast Bonanza"
-            titleStyle={{fontSize: 18}}
-            iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-            iconElementRight={<IconButton><Launch /></IconButton>}
-          />
-          <List>
-            {/*for each task in routine */}
-            <Divider />
-            {/* insert onTapTouch for ListItem */}
-            <ListItem
-              primaryText="17 Banaynays"
-              rightIcon={<Launch />}
-            />
-          </List>
-        </Paper>
+        {this.state.routines.map((routine) => {
+          return (
+            <Paper style={paperStyle} zDepth={4}>
+              {/* insert onTapTouch for FlatButton */}
+              <AppBar
+                title={routine.name}
+                titleStyle={{fontSize: 18}}
+                iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+                iconElementRight={<IconButton><Launch /></IconButton>}
+              />
+              <List>
+                {/*for each task in routine */}
+                <Divider />
+                {/* insert onTapTouch for ListItem */}
+                <ListItem
+                  primaryText="Jog 2 miles"
+                  rightIcon={<Launch />}
+                />
+              </List>
+            </Paper>
+          );
+        })}
       </div>
     );
   }
