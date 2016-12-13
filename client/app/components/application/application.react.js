@@ -6,7 +6,10 @@ import CreateRoutine from '../routine/create-routine.react';
 import MyRoutines from '../routine/my-routines.react';
 import Task from '../task/task.react';
 import CreateTask from '../task/create-task.react';
+import Home from '../home/home.react';
+import SideMenu from '../side-menu/side-menu.react';
 import UserActions from '../../flux/actions/user-actions';
+
 
 import UserStore from '../../flux/stores/user-store';
 import RoutineStore from '../../flux/stores/routine-store';
@@ -42,8 +45,8 @@ export default class Application extends React.Component {
     });
 
     UserStore.addChangeListener(this.getUserData.bind(this));
-    RoutineStore.addChangeListener(this.getUserData.bind(this));
-    TaskStore.addChangeListener(this.getUserData.bind(this));
+    RoutineStore.addChangeListener(this.getRoutineData.bind(this));
+    TaskStore.addChangeListener(this.getTaskData.bind(this));
   }
 
   componentWillUnmount() {
@@ -84,10 +87,12 @@ export default class Application extends React.Component {
   }
 
   render() {
+
     return (
       <div id='application'>
         <MyRoutines routines={this.state.routines}
-                    tasks={this.state.tasks} />
+                    tasks={this.state.tasks}
+        />
       </div>
     );
   }

@@ -6,13 +6,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
 import IconButton from 'material-ui/IconButton';
 import Reorder from 'material-ui/svg-icons/action/reorder';
+import { Link } from 'react-router';
 
 export default class MyRoutinesNav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
   }
 
   render() {
@@ -28,9 +26,9 @@ export default class MyRoutinesNav extends React.Component {
         <Toolbar>
           <ToolbarGroup firstChild={true}>
             {/* handle reorder href to open SideMenu */}
-            <IconButton>
-              <Reorder />
-            </IconButton>
+            {/*<IconButton onTouchTap={this.props.handleToggle.bind(this)}>*/}
+              {/*<Reorder />*/}
+            {/*</IconButton>*/}
             <ToolbarTitle style={logoStyle} text="Team Dino" />
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
@@ -44,7 +42,7 @@ export default class MyRoutinesNav extends React.Component {
               labelPosition="before"
               primary={true}
               icon={<AddCircleOutline />}
-              />
+            />
             <ToolbarSeparator />
             {/* insert onClick/onTapTouch to RaisedButton */}
             <RaisedButton
@@ -52,7 +50,7 @@ export default class MyRoutinesNav extends React.Component {
               labelPosition="before"
               primary={true}
               icon={<PowerSettingsNew />}
-              />
+            />
           </ToolbarGroup>
         </Toolbar>
       </div>
