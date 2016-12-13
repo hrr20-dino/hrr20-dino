@@ -6,10 +6,15 @@ import CreateRoutine from '../routine/create-routine.react';
 import MyRoutines from '../routine/my-routines.react';
 import Task from '../task/task.react';
 import CreateTask from '../task/create-task.react';
+import UserActions from '../../flux/actions/user-actions';
 
 import UserStore from '../../flux/stores/user-store';
 import RoutineStore from '../../flux/stores/routine-store';
 import TaskStore from '../../flux/stores/task-store';
+
+UserStore.useMockData();
+RoutineStore.useMockData();
+TaskStore.useMockData();
 
 export default class Application extends React.Component {
   constructor(props) {
@@ -28,6 +33,13 @@ export default class Application extends React.Component {
     this.getUserData();
     this.getRoutineData();
     this.getTaskData();
+
+    UserActions.setCurrentUser({
+      name: 'Sir Testburg',
+      password:'test',
+      id: 1234,
+      avatar: 'http://www.yesnet.yk.ca/schools/projects/middleages2000/knights/graphics/horse.gif'
+    });
 
     UserStore.addChangeListener(this.getUserData.bind(this));
     RoutineStore.addChangeListener(this.getUserData.bind(this));
@@ -76,7 +88,6 @@ export default class Application extends React.Component {
       <div id='application'>
         <MyRoutines routines={this.state.routines}
                     tasks={this.state.tasks} />
-        <CreateRoutine />
       </div>
     );
   }

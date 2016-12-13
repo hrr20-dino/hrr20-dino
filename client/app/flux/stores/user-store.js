@@ -13,6 +13,10 @@ class UserStore extends Store {
       currentUser: null
     });
   }
+
+  setCurrentUser(user) {
+    this.db.setCurrentUser(user);
+  }
 }
 
 let that = new UserStore();
@@ -29,6 +33,10 @@ that.dispatchToken = AppDispatcher.register(action => {
 
     case UserConstants.REMOVE_USER:
       that._remove(action.id);
+      break;
+
+    case UserConstants.SET_CURRENT_USER:
+      that.setCurrentUser(action.user);
       break;
 
     default:

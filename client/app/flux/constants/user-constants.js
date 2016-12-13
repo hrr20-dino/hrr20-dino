@@ -6,6 +6,8 @@ export default keyMirror({
 
   REMOVE_USER: null,
 
-  UPDATE_USER: null
+  UPDATE_USER: null,
+
+  SET_CURRENT_USER: null
 
 });

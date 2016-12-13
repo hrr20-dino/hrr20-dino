@@ -10,8 +10,9 @@ import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import RoutineStore from '../../flux/stores/routine-store';
 import TaskStore from '../../flux/stores/task-store';
-import _ from 'lodash';
 
+RoutineStore.useMockData();
+TaskStore.useMockData();
 
 export default class MyRoutines extends React.Component {
   constructor(props) {

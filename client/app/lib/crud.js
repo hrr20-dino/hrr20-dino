@@ -20,13 +20,25 @@ export default class Crud {
       baseURL: config.baseURL
     });
 
+    this.currentUser = {
+      id: 0
+    };
+
     return instance;
   }
 
-  get(endpoint, params) {
+  setCurrentUser(user) {
+    this.currentUser = user;
+  }
+
+  getCurrentUser() {
+    return this.currentUser;
+  }
+
+  get(endpoint, params = {}) {
     return new Promise((resolve, reject) => {
       const id = params.id !== undefined ? params.id : '';
-      this.axios.get(`/${endpoint}/${id}`, {
+      this.axios.get(`/${endpoint}/${this.currentUser.id}/${id}`, {
         params: params
       })
         .then((res) => {
@@ -40,7 +52,7 @@ export default class Crud {
 
   post(endpoint, data) {
     return new Promise((resolve, reject) => {
-      this.axios.post(`/${endpoint}`, data)
+      this.axios.post(`/${endpoint}/${this.currentUser.id}`, data)
         .then((res) => {
           resolve(res);
         })
@@ -52,7 +64,7 @@ export default class Crud {
 
   update(endpoint, id, data) {
     return new Promise((resolve, reject) => {
-      this.axios.put(`/${endpoint}/${id}`, data)
+      this.axios.put(`/${endpoint}/${this.currentUser.id}/${id}`, data)
         .then((res) => {
           resolve(res);
         })
@@ -64,7 +76,7 @@ export default class Crud {
 
   delete(endpoint, id) {
     return new Promise((resolve, reject) => {
-      this.axios.delete(`/${endpoint}`, id)
+      this.axios.delete(`/${endpoint}/${this.currentUser.id}`, id)
         .then((res) => {
           resolve(res);
         })
