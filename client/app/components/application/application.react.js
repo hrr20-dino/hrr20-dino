@@ -2,8 +2,8 @@ import React from 'react';
 // import TestComponent from './test-component.react';
 // import PreAuthNav from '../routine/pre-auth-nav.react';
 // import Routine from '../routine/routine.react';
-// import CreateRoutine from '../routine/create-routine.react';
-// import MyRoutines from '../routine/my-routines.react';
+import CreateRoutine from '../routine/create-routine.react';
+import MyRoutines from '../routine/my-routines.react';
 import Task from '../task/task.react';
 import CreateTask from '../task/create-task.react';
 
@@ -33,9 +33,9 @@ export default class Application extends React.Component {
     this.getRoutineData();
     this.getTaskData();
 
-    UserStore.addChangeListener(this.getUserData);
-    RoutineStore.addChangeListener(this.getUserData);
-    TaskStore.addChangeListener(this.getUserData);
+    UserStore.addChangeListener(this.getUserData.bind(this));
+    RoutineStore.addChangeListener(this.getUserData.bind(this));
+    TaskStore.addChangeListener(this.getUserData.bind(this));
   }
 
   componentWillUnmount() {
@@ -78,11 +78,7 @@ export default class Application extends React.Component {
   render() {
     return (
       <div id='application'>
-        <MyRoutines user={this.state.currentUser}
-                    routines={this.state.routines}
-                    tasks={this.state.tasks}
-        />
-        <CreateTask/>
+        <MyRoutines routine={this.state.routines} />
       </div>
     );
   }
