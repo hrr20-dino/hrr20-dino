@@ -10,7 +10,8 @@ import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import RoutineStore from '../../flux/stores/routine-store';
 import TaskStore from '../../flux/stores/task-store';
-import classNames from 'classnames';
+import RoutineActions from '../../flux/actions/routine-actions';
+
 
 RoutineStore.useMockData();
 TaskStore.useMockData();
@@ -29,6 +30,10 @@ export default class MyRoutines extends React.Component {
     });
   }
 
+  handleRemoveRoutine(id) {
+    RoutineActions.remove(id);
+  }
+
   render() {
     const paperStyle = {
       float: 'left',
@@ -38,18 +43,19 @@ export default class MyRoutines extends React.Component {
       overflow: 'auto'
     };
 
-
     return (
       <div>
         <MyRoutinesNav />
         {this.props.routines.map((routine) => {
           return (
-            <Paper style={paperStyle} zDepth={4}>
+            <Paper key={routine.id} style={paperStyle} zDepth={4}>
               {/* insert onTapTouch for FlatButton */}
               <AppBar
                 title={routine.name}
                 titleStyle={{fontSize: 18}}
-                iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+                iconElementLeft={ <IconButton onClick={this.handleRemoveRoutine.bind(this, routine.id)}>
+                                    <NavigationClose />
+                                  </IconButton> }
                 iconElementRight={<IconButton><Launch /></IconButton>}
               />
               <List>
@@ -57,7 +63,7 @@ export default class MyRoutines extends React.Component {
                 {/*for each task in routine */}
                 {this.findTasksForRoutine(routine).map((task) => {
                   return (
-                    <div>
+                    <div key={task.id}>
                       <Divider />
                       {/* insert onTapTouch for ListItem */}
                       <ListItem
