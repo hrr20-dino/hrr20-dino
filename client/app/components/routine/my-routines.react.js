@@ -9,36 +9,22 @@ import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import RoutineStore from '../../flux/stores/routine-store';
+import TaskStore from '../../flux/stores/task-store';
+import _ from 'lodash';
 
 RoutineStore.useMockData();
+TaskStore.useMockData();
 
 
 export default class MyRoutines extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      routines: []
-    };
   }
 
-  componentDidMount() {
-    this.getRoutines();
-
-    RoutineStore.addChangeListener(this.getRoutines);
-  }
-
-  componentWillUnmount() {
-    RoutineStore.removeChangeListener(this.getRoutines);
-  }
-
-  getRoutines() {
-    RoutineStore
-      .get()
-      .then((data) => {
-        this.setState({
-          routines: data.collection
-        });
-      });
+  findTasksForRoutine(routine) {
+    return this.props.tasks.filter((task) => {
+      return task.routineId === routine.id;
+    });
   }
 
   render() {
@@ -51,8 +37,7 @@ export default class MyRoutines extends React.Component {
     return (
       <div>
         <MyRoutinesNav />
-        {/*map over user routine data to create card routine for each routine */}
-        {this.state.routines.map((routine) => {
+        {this.props.routines.map((routine) => {
           return (
             <Paper style={paperStyle} zDepth={4}>
               {/* insert onTapTouch for FlatButton */}
@@ -63,13 +48,20 @@ export default class MyRoutines extends React.Component {
                 iconElementRight={<IconButton><Launch /></IconButton>}
               />
               <List>
+
                 {/*for each task in routine */}
-                <Divider />
-                {/* insert onTapTouch for ListItem */}
-                <ListItem
-                  primaryText="Jog 2 miles"
-                  rightIcon={<Launch />}
-                />
+                {this.findTasksForRoutine(routine).map((task) => {
+                  return (
+                    <div>
+                      <Divider />
+                      {/* insert onTapTouch for ListItem */}
+                      <ListItem
+                        primaryText={task.name}
+                        rightIcon={<Launch />}
+                      />
+                    </div>
+                  );
+                })}
               </List>
             </Paper>
           );
