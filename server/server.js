@@ -16,7 +16,6 @@ const router = require('./routes')(app, express);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use('/', router);
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
