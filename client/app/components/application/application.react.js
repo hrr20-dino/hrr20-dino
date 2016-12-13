@@ -74,7 +74,9 @@ export default class Application extends React.Component {
   render() {
     return (
       <div id='application'>
-        <MyRoutines routines={this.state.routines} tasks={this.state.tasks} />
+        <MyRoutines routines={this.state.routines}
+                    tasks={this.state.tasks} />
+        <CreateRoutine />
       </div>
     );
   }

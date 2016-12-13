@@ -36,7 +36,7 @@ module.exports = function(app, express) {
     .post(routineController.addRoutine);
 
   //all the routes for tasks
-  router.route('/task/:routinId')
+  router.route('/task/:routineId')
     .get(taskController.getAllTasks);
 
   router.route('/task/:routineId/:taskId')

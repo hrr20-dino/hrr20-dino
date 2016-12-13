@@ -9,7 +9,7 @@ import Store from './store';
 class UserStore extends Store {
   constructor() {
     super({
-      storeName: 'user',
+      storeName: 'users',
       currentUser: null
     });
   }

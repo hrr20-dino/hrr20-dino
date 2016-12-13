@@ -23,7 +23,7 @@ export default class Crud {
     return instance;
   }
 
-  get(endpoint, params = { limit: 10, orderBy: 'desc' }) {
+  get(endpoint, params) {
     return new Promise((resolve, reject) => {
       const id = params.id !== undefined ? params.id : '';
       this.axios.get(`/${endpoint}/${id}`, {
