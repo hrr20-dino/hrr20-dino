@@ -9,9 +9,8 @@ import Store from './store';
 class RoutineStore extends Store {
   constructor() {
     super({
-      storeName: 'routine'
+      storeName: 'routines'
     });
-
   }
 }
 

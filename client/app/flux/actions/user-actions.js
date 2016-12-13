@@ -22,5 +22,12 @@ export default {
       id: data.id,
       newData: data.newData
     });
+  },
+
+  setCurrentUser(data) {
+    AppDispatcher.dispatch({
+      actionType: UserConstants.SET_CURRENT_USER,
+      user: data
+    });
   }
 };

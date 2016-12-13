@@ -9,9 +9,13 @@ import Store from './store';
 class UserStore extends Store {
   constructor() {
     super({
-      storeName: 'user',
+      storeName: 'users',
       currentUser: null
     });
+  }
+
+  setCurrentUser(user) {
+    this.db.setCurrentUser(user);
   }
 }
 
@@ -29,6 +33,10 @@ that.dispatchToken = AppDispatcher.register(action => {
 
     case UserConstants.REMOVE_USER:
       that._remove(action.id);
+      break;
+
+    case UserConstants.SET_CURRENT_USER:
+      that.setCurrentUser(action.user);
       break;
 
     default:
