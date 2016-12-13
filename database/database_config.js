@@ -11,13 +11,13 @@ var db_connection = new Sequelize('app_data', /*localuser*/, '', {
 //########################__Define Models__###############################
 
 var User = db_connection.define('user', {
-  name: {type: Sequelize.STRING, unique: true, primaryKey: true, validate: {notEmpty: true}},
+  name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}},
   password: {type: Sequelize.STRING, validate: {notEmpty: true}},
   avatar: {type: Sequelize.STRING}
 });
 
 var Routine = db_connection.define('routine', {
-  name: {type: Sequelize.STRING, unique: true, primaryKey: true, validate: {notEmpty: true}},
+  name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}},
   description: {type: Sequelize.TEXT, validate: {notEmpty: true}},
   start_time: {type: Sequelize.TIME},
   end_time: {type: Sequelize.TIME},
@@ -26,7 +26,7 @@ var Routine = db_connection.define('routine', {
 });
 
 var Task = db_connection.define('task', {
-  name: {type: Sequelize.STRING, unique: true, primaryKey: true, validate: {notEmpty: true}},
+  name: {type: Sequelize.STRING, unique: true, validate: {notEmpty: true}},
   description: {type: Sequelize.STRING, validate: {notEmpty: true}},
   completed: {type: Sequelize.BOOLEAN}
 });
