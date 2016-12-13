@@ -27,20 +27,21 @@ module.exports = function(app, express) {
   //   .post(routineController.addRoutine);
 
   router.route('/routines/:userId')
-    .get(routineController.getMyRoutines);
+    .get(routineController.getMyRoutines)
+    .post(routineController.addARoutine);
 
   router.route('/routines/:userId/:routineId')
     .get(routineController.getARoutine)
     .put(routineController.updateARoutine)
     .delete(routineController.deleteARoutine)
-    .post(routineController.addRoutine);
+
 
   //all the routes for tasks
-  router.route('/task/:routineId')
-    .get(taskController.getAllTasks);
+  router.route('/tasks/:userId/:routineId')
+    .get(taskController.getAllTasks)
+    .post(taskController.addATask);
 
-  router.route('/task/:routineId/:taskId')
-    .post(taskController.addTask)
+  router.route('/tasks/:userId/:taskId')
     .put(taskController.updateATask)
     .delete(taskController.deleteATask);
 

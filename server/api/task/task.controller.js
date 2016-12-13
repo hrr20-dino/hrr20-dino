@@ -4,11 +4,12 @@ const Models = require('../../../database/database_config');
 
 module.exports = {
 
-  addTask: function (req, res, next) {
+  addATask: function (req, res, next) {
     Models.Task.build({
       name: req.body.name,
       description: req.body.description,
-      completed: req.body.completed
+      completed: req.body.completed,
+      routineId: req.params.routineId
     })
     .save()
     .then(function(addedTask) {
@@ -42,7 +43,7 @@ module.exports = {
       }
     })
     .then(function(result) {
-      res.json(result);
+      res.send('Task successfully removed!');
     })
     .catch(function(error) {
       next(error);
@@ -53,9 +54,10 @@ module.exports = {
     Models.Task.update(req.body, {
       where: {
         id:  req.params.taskId
-      }
+      },
+      returning: true
     })
-    .then(function(result) {
+    .then(function(count, result) {
       res.json(result);
     })
     .catch(function(error) {
