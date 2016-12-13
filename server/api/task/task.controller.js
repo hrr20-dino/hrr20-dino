@@ -23,7 +23,7 @@ module.exports = {
   getAllTasks: function(req, res, next) {
     Models.Task.findAll({
       where: {
-        id: req.params.routineId
+        id: req.params.routineName
       }
     })
       .then(function (tasks) {
