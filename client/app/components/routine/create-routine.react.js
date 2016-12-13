@@ -6,16 +6,41 @@ import Toggle from 'material-ui/Toggle';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import RoutineActions from '../../flux/actions/routine-actions';
 
 
 export default class CreateRoutine extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
 
+    this.state = {
+      name: null,
+      description: null,
+      days: {
+        sunday: false,
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false
+      }
     };
   }
 
+  handleChange(fieldName, event) {
+    this.setState({
+      [fieldName]: event.target.value
+    });
+  }
+
+  handleToggle(day) {
+    this.setState({
+      days: Object.assign({},
+                            this.state.days,
+                            { [day] : !this.state.days[day] })
+    });
+  }
 
   render() {
     const paperStyle = {
@@ -28,56 +53,41 @@ export default class CreateRoutine extends React.Component {
       alignItems: 'center',
       justifyContent: 'center'
     };
+
     return (
       <div>
         <CreateRoutineNav />
         <div style={centerPaper}>
           <div>
             <Paper style={paperStyle} zDepth={4}>
-              {/* inser onChange into text field */}
               <div style={{margin: 20}}>
                 <TextField
                   type="text"
                   hintText="ex. Morning Workout"
                   floatingLabelText="Please input the name of your Routine"
                   fullWidth={true}
+                  onChange={this.handleChange.bind(this, 'name')}
                 /><br />
                 <div style={{fontSize: 18 + 'px'}}>Repeat</div>
-                {/* insert defaultToggled props from routine.repeat and style for each Toggle*/}
-                <Toggle
-                 label="Sunday"
-                 defaultToggled={false}
-                />
-                <Toggle
-                 label="Monday"
-                 defaultToggled={false}
-                />
-                <Toggle
-                 label="Tuesday"
-                 defaultToggled={false}
-                />
-                <Toggle
-                 label="Wednesday"
-                 defaultToggled={false}
-                />
-                <Toggle
-                 label="Thursday"
-                 defaultToggled={false}
-                />
-                <Toggle
-                 label="Friday"
-                 defaultToggled={false}
-                />
-                <Toggle
-                 label="Saturday"
-                 defaultToggled={false}
-                />
+
+                { Object.keys(this.state.days).map((day) => {
+                  return (
+                    <Toggle
+                      label={[day]}
+                      onToggle={this.handleToggle.bind(this, day)}
+                      toggled={this.state.days[day]}
+                    />
+                  );
+                })}
+
                 <Divider />
                 <TextField
                   hintText="ex. My morning workout consisting of stretching, cardio, weightlifting, and some jammin' tunes!" floatingLabelText="Please input the description of your Routine"
                   fullWidth={true}
                   multiLine={true}
-                  rows={4} />
+                  rows={4}
+                  onChange={this.handleChange.bind(this, 'description')}
+                />
                 <RaisedButton
                   label="Add Routine"
                   labelPosition="before"
