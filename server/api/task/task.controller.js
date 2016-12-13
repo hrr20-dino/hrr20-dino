@@ -23,7 +23,7 @@ module.exports = {
   getAllTasks: function(req, res, next) {
     Models.Task.findAll({
       where: {
-        taskId: req.params.routineId
+        routineId: req.params.routineId
       }
     })
       .then(function (tasks) {
@@ -38,7 +38,7 @@ module.exports = {
   deleteATask: function(req, res, next) {
     Models.Task.destroy({
       where: {
-        taskId: req.params.taskId
+        id: req.params.taskId
       }
     })
     .then(function(result) {
@@ -52,7 +52,7 @@ module.exports = {
   updateATask: function(req, res, next) {
     Models.Task.update(req.body, {
       where: {
-        taskId: Number(req.params.taskId)
+        id:  req.params.taskId
       }
     })
     .then(function(result) {
