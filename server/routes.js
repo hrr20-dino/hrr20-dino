@@ -36,12 +36,11 @@ module.exports = function(app, express) {
     .post(routineController.addRoutine);
 
   //all the routes for tasks
-  router.route('/task')
-    .get(taskController.getAllTasks)
-    .post(taskController.addTask);
+  router.route('/task/:routineName')
+    .get(taskController.getAllTasks);
 
-  router.route('/task/:task_id')
-    .get(taskController.getATask)
+  router.route('/task/:routineName/:taskName')
+    .post(taskController.addTask)
     .put(taskController.updateATask)
     .delete(taskController.deleteATask);
 
