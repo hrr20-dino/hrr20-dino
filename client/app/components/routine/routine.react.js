@@ -21,6 +21,7 @@ export default class Routine extends React.Component {
       height: 600,
       width: 600,
       margin: 20,
+      overflow: 'auto'
     };
     const centerPaper = {
       display: 'flex',
