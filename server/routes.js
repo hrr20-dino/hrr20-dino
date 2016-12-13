@@ -22,14 +22,18 @@ module.exports = function(app, express) {
     .delete(userController.deleteAUser);
 
   //all the routes for routines
-  router.route('/routines')
-    .get(routineController.getMyRoutines)
-    .post(routineController.addRoutine);
+  // router.route('/routines')
+  //   .get(routineController.getMyRoutines)
+  //   .post(routineController.addRoutine);
 
-  router.route('/routines/:routines_id')
+  router.route('/routines/:userName')
+    .get(routineController.getMyRoutines);
+
+  router.route('/routines/:userName/:routineName')
     .get(routineController.getARoutine)
     .put(routineController.updateARoutine)
-    .delete(routineController.deleteARoutine);
+    .delete(routineController.deleteARoutine)
+    .post(routineController.addRoutine);
 
   //all the routes for tasks
   router.route('/task')
@@ -44,14 +48,16 @@ module.exports = function(app, express) {
 
 
   // All undefined asset or api routes should return a 404
-  app.route('/:url(api|auth|components|app|bower_components|assets)/*')
+  router.route('/:url(api|auth|components|app|bower_components|assets)/*')
     .get((req, res) => {
       res.status(404);
     });
 
   // All other routes should redirect to the index.html
-  app.route('/*')
+  router.route('/*')
     .get((req, res) => {
       res.sendFile(path.join(__dirname, 'dist/index.html'));
     });
+
+    return router;
 };

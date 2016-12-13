@@ -6,15 +6,18 @@ const path = require('path');
 const config = require('./config/express');
 const routes = require('./routes');
 const port = process.env.PORT || 3000;
+const bodyParser = require('body-parser');
 
 // set up database connection here
 // do all that app.set, app.use, etc in ./config/express.js
 
 require('./config/express')(app);
-require('./routes')(app, express);
+const router = require('./routes')(app, express);
 
-const server = require('http').createServer(app);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-server.listen(port, () => {
+app.use('/', router);
+app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
