@@ -42,6 +42,14 @@ export default class CreateRoutine extends React.Component {
     });
   }
 
+  handleSubmit() {
+    RoutineActions.add({
+      name: this.state.name || '',
+      description: this.state.description || '',
+      repeat: this.state.days
+    });
+  }
+
   render() {
     const paperStyle = {
       height: 600,
@@ -81,6 +89,7 @@ export default class CreateRoutine extends React.Component {
                 })}
 
                 <Divider />
+
                 <TextField
                   hintText="ex. My morning workout consisting of stretching, cardio, weightlifting, and some jammin' tunes!" floatingLabelText="Please input the description of your Routine"
                   fullWidth={true}
@@ -93,6 +102,7 @@ export default class CreateRoutine extends React.Component {
                   labelPosition="before"
                   primary={true}
                   icon={<AddCircleOutline />}
+                  onClick={this.handleSubmit.bind(this)}
                 />
               </div>
             </ Paper>
