@@ -3,7 +3,9 @@ import React from 'react';
 // import PreAuthNav from '../routine/pre-auth-nav.react';
 // import Routine from '../routine/routine.react';
 // import CreateRoutine from '../routine/create-routine.react';
-import MyRoutines from '../routine/my-routines.react';
+// import MyRoutines from '../routine/my-routines.react';
+import Task from '../task/task.react';
+import CreateTask from '../task/create-task.react';
 
 
 export default class Application extends React.Component {
@@ -16,7 +18,9 @@ export default class Application extends React.Component {
       <div id='application'>
         {/*<PreAuthNav />*/}
         {/*<TestComponent />*/}
-        <MyRoutines />
+        {/* <MyRoutines /> */}
+        <Task/>
+        <CreateTask/>
       </div>
     );
   }
