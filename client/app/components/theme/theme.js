@@ -7,18 +7,21 @@ import zIndex from 'material-ui/styles/zIndex';
 export default {
   spacing: Spacing,
   zIndex: zIndex,
-  fontFamily: 'Quattrocento, sans-serif',
+  fontFamily: 'Roboto, sans-serif',
+  AppBar: {
+    textColor: Colors.white
+  },
   palette: {
-    primary1Color: Colors.teal900,
-    primary2Color: Colors.teal700,
-    primary3Color: Colors.teal50,
-    accent1Color: Colors.blueGrey600,
-    accent2Color: Colors.blueGrey400,
-    accent3Color: Colors.blueGrey100,
+    primary1Color: Colors.deepPurple300,
+    primary2Color: Colors.green200,
+    primary3Color: Colors.green200,
+    accent1Color: Colors.green300,
+    accent2Color: Colors.green300,
+    accent3Color: Colors.green300,
     textColor: Colors.teal900,
     alternateTextColor: Colors.white,
     canvasColor: Colors.white,
-    borderColor: Colors.grey300,
-    pickerHeaderColor: Colors.teal900,
+    pickerHeaderColor: Colors.green200,
+    ToolbarGroup: Colors.blue200,
   }
 };

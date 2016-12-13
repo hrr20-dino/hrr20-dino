@@ -1,6 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
+import * as Colors from 'material-ui/styles/colors';
 
 export default class PreAuthNav extends React.Component {
   constructor(props) {
@@ -13,7 +14,8 @@ export default class PreAuthNav extends React.Component {
   render() {
     const titleStyle = {
       fontWeight: 'bold',
-      fontSize: 28
+      fontSize: 24,
+      color: Colors.white
     };
     return (
       <div>
