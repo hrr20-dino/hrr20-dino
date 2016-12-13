@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "main": "server/server.js",
   "scripts": {
-    "start": "gulp",
+    "start": "node ./server/server.js",
     "test": "gulp test"
   },
   "devDependencies": {
