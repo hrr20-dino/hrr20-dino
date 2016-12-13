@@ -1,19 +1,13 @@
 import React from 'react';
-import UserStore from '../stores/user-store';
-import UserActions from '../actions/user-actions';
-import RoutineStore from '../stores/routine-store';
-import RoutineActions from '../actions/routine-actions';
-import TaskStore from '../stores/task-store';
-import TaskActions from '../actions/task-actions';
 import MyRoutinesNav from './my-routines-nav.react.js';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
-import Launch from 'material-ui/svg-icons/file/launch';
+import Launch from 'material-ui/svg-icons/action/launch';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import IconButton from 'material-ui/IconButton';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 
 export default class MyRoutines extends React.Component {
@@ -25,30 +19,53 @@ export default class MyRoutines extends React.Component {
   }
 
   render() {
+    const paperStyle = {
+      float: 'left',
+      height: 400,
+      width: 300,
+      margin: 30,
+    };
     return (
       <div>
         <MyRoutinesNav />
-        // map over user routine data to create card routine for each routine
-        <Paper style={} zDepth={4} />
+        {/*map over user routine data to create card routine for each routine */}
+        <Paper style={paperStyle} zDepth={4}>
+          {/* insert onTapTouch for FlatButton */}
           <AppBar
-            title={<span style={} onClick={}>{routine.title}</span>}
-            <FlatButton
-              onClick={}
-              label="Open Routine"
-              labelPosition="before"
-              primary={true}
-              icon={<Launch />}
-            />
+            title="Morning Workout"
+            titleStyle={{fontSize: 18}}
+            iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+            iconElementRight={<IconButton><Launch /></IconButton>}
           />
           <List>
-            // for each task in routine
+            {/*for each task in routine */}
             <Divider />
+            {/* insert onTapTouch for ListItem */}
             <ListItem
-              primaryText={}
-              rightIcon={<Launch onClick={} />}
+              primaryText="Jog 2 miles"
+              rightIcon={<Launch />}
             />
           </List>
-        <Paper />
+        </Paper>
+        {/* Additional Hardcoded Routine for testing. Get rid of when wiring to routine data. */}
+        <Paper style={paperStyle} zDepth={4}>
+          {/* insert onTapTouch for FlatButton */}
+          <AppBar
+            title="Breakfast Bonanza"
+            titleStyle={{fontSize: 18}}
+            iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+            iconElementRight={<IconButton><Launch /></IconButton>}
+          />
+          <List>
+            {/*for each task in routine */}
+            <Divider />
+            {/* insert onTapTouch for ListItem */}
+            <ListItem
+              primaryText="17 Banaynays"
+              rightIcon={<Launch />}
+            />
+          </List>
+        </Paper>
       </div>
     );
   }

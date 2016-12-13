@@ -54,6 +54,7 @@
     "pg": "^6.1.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-tap-event-plugin": "^2.0.1",
     "sequelize": "^3.27.0"
   }
 }
