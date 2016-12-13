@@ -5,8 +5,21 @@ const Models = Promise.promisifyAll(require('../../../database/database_config')
 module.exports = {
 
   addTask: function (req, res, next) {
+<<<<<<< 4634c8679a039d208c97d5f566a1f2d8f9896f5a
       if (JSON.parse(req.body))
       var task = req.body
+=======
+    var task = JSON.parse(req.body);
+    if (t)
+    Models.Task.build(req.body)
+    .save()
+    .then(function(addedTask) {
+      res.json(addedTask.dataValues);
+    })
+    .catch(function(error) {
+      next(error);
+    });
+>>>>>>> Updated task controller and routes
   },
 
   //gets the routines for the specific user
