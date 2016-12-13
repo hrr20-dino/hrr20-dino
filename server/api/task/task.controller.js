@@ -12,7 +12,7 @@ module.exports = {
     })
     .save()
     .then(function(addedTask) {
-      res.json(addedTask.dataValues);
+      res.json(addedTask);
     })
     .catch(function(error) {
       next(error);
@@ -23,7 +23,7 @@ module.exports = {
   getAllTasks: function(req, res, next) {
     Models.Task.findAll({
       where: {
-        id: req.params.routineName
+        taskId: req.params.routineId
       }
     })
       .then(function (tasks) {
@@ -38,7 +38,7 @@ module.exports = {
   deleteATask: function(req, res, next) {
     Models.Task.destroy({
       where: {
-        id: req.params.taskName
+        taskId: req.params.taskId
       }
     })
     .then(function(result) {
@@ -52,11 +52,11 @@ module.exports = {
   updateATask: function(req, res, next) {
     Models.Task.update(req.body, {
       where: {
-        id: Number(req.params.taskName)
+        taskId: Number(req.params.taskId)
       }
     })
     .then(function(result) {
-      res.json(result[0]);
+      res.json(result);
     })
     .catch(function(error) {
       next(error);
