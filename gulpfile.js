@@ -30,7 +30,10 @@ const vendors = [
   'classnames',
   'keymirror',
   'flux',
-  'axios'
+  'axios',
+  'react-router',
+  'material-ui',
+  'react-tap-event-plugin'
 ];
 
 var path = {
@@ -182,29 +185,29 @@ const injectFileDependencies = function() {
 
 
 const startServer = function() {
-  // browserSync.init({
-  //   server: {
-  //     baseDir: './server/dist'
-  //   }
-  // });
-  const server = nodemon({
-    script: 'server/server.js',
-    watch: ['server/*.js', 'server/app/**/*.js']
-  });
-
-  let once = false;
-
-  server.on('start', () => {
-    if (!once) {
-      browserSync.init({
-        proxy: 'localhost:3000',
-        port: 4000
-      });
-      once = true;
+  browserSync.init({
+    server: {
+      baseDir: './server/dist'
     }
   });
-
-  return server;
+  // const server = nodemon({
+  //   script: 'server/server.js',
+  //   watch: ['server/*.js', 'server/app/**/*.js']
+  // });
+  //
+  // let once = false;
+  //
+  // server.on('start', () => {
+  //   if (!once) {
+  //     browserSync.init({
+  //       proxy: 'localhost:3000',
+  //       port: 4000
+  //     });
+  //     once = true;
+  //   }
+  // });
+  //
+  // return server;
 };
 
 

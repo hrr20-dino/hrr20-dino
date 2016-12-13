@@ -4,6 +4,6 @@ import MockUserData from './mock-user-data';
 
 export default {
   routines: MockRoutineData,
-  task: MockTaskData,
+  tasks: MockTaskData,
   users: MockUserData
 };

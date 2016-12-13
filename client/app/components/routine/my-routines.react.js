@@ -10,6 +10,7 @@ import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import RoutineStore from '../../flux/stores/routine-store';
 import TaskStore from '../../flux/stores/task-store';
+import classNames from 'classnames';
 
 RoutineStore.useMockData();
 TaskStore.useMockData();
@@ -17,6 +18,10 @@ TaskStore.useMockData();
 export default class MyRoutines extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      visible: true
+    };
   }
 
   findTasksForRoutine(routine) {
@@ -32,8 +37,13 @@ export default class MyRoutines extends React.Component {
       width: 300,
       margin: 30,
     };
+
+    const myRoutinesStyle = classNames({
+      hidden: !this.state.visible
+    });
+
     return (
-      <div>
+      <div className={myRoutinesStyle}>
         <MyRoutinesNav />
         {this.props.routines.map((routine) => {
           return (

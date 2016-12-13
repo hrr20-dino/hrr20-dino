@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import RoutineActions from '../../flux/actions/routine-actions';
+import { Link } from 'react-router';
 
 
 export default class CreateRoutine extends React.Component {
@@ -64,7 +65,7 @@ export default class CreateRoutine extends React.Component {
 
     return (
       <div>
-        <CreateRoutineNav />
+        {/*<CreateRoutineNav />*/}
         <div style={centerPaper}>
           <div>
             <Paper style={paperStyle} zDepth={4}>
@@ -103,6 +104,7 @@ export default class CreateRoutine extends React.Component {
                   primary={true}
                   icon={<AddCircleOutline />}
                   onClick={this.handleSubmit.bind(this)}
+                  Link to='/'
                 />
               </div>
             </ Paper>

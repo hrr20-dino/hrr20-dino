@@ -15,16 +15,20 @@ export default class SideMenu extends React.Component {
     };
   }
 
-  handleToggle = () => this.setState({open: !this.state.open});
+  handleToggle() {
+    this.setState({open: !this.state.open});
+  }
 
-  handleClose = () => this.setState({open: false});
+  handleClose() {
+    this.setState({open: false});
+  }
 
   render() {
     return (
       <div>
         {/* insert function into open to handle boolean drawer view */}
         <Drawer
-          open={true}
+          open={ this.state.open }
           docked={false}
           width={200}
           onRequestChange={(open) => this.setState({open})}
@@ -33,13 +37,13 @@ export default class SideMenu extends React.Component {
           <h3>Test User</h3>
           <Menu>
             <MenuItem
-              onTouchTap={this.handleClose}
+              onTouchTap={this.handleClose.bind(this)}
               primaryText="My Routines"
               rightIcon={<List />}
             />
             <Divider />
             <MenuItem
-              onTouchTap={this.handleClose}
+              onTouchTap={this.handleClose.bind(this)}
               primaryText="Review Routines"
               rightIcon={<RateReview />}
             />
