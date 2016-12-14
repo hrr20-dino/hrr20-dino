@@ -21,7 +21,7 @@ export default class PreAuthNav extends React.Component {
           <ToolbarGroup firstChild={true}>
             <ToolbarTitle
               style={titleStyle}
-              text="Team Dino"
+              text="DinoTask"
             />
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>

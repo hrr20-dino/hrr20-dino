@@ -36,7 +36,7 @@ export default class CreateRoutineNav extends React.Component {
               <Reorder />
             </IconButton>
             <Link to='/'>
-              <ToolbarTitle style={logoStyle} text="Team Dino" />
+              <ToolbarTitle style={logoStyle} text="DinoTask" />
             </Link>
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
