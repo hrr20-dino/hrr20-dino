@@ -34,7 +34,7 @@ export default class Routine extends React.Component {
             <IconButton>
               <Reorder />
             </IconButton>
-            <ToolbarTitle style={logoStyle} text="Team Dino" />
+            <ToolbarTitle style={logoStyle} text="DinoTask" />
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
             {/* insert onClick/onTapTouch to ArrowBack */}
