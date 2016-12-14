@@ -40,61 +40,61 @@ export default [
     {
       id: uuid.v4(),
       routineId: 5678,
-      name: 'self-care',
+      name: 'visit elders',
       description: 'be a better person by improving my body and mind'
     },
     {
       id: uuid.v4(),
       routineId: 5678,
-      name: 'self-care',
+      name: 'read a book',
       description: 'be a better person by improving my body and mind'
     },
     {
       id: uuid.v4(),
       routineId: 5678,
-      name: 'self-care',
+      name: 'take a bath',
       description: 'be a better person by improving my body and mind'
     },
     {
       id: uuid.v4(),
       routineId: 5678,
-      name: 'self-care',
+      name: 'gardening',
       description: 'be a better person by improving my body and mind'
     },
     {
       id: uuid.v4(),
       routineId: 5678,
-      name: 'self-care',
+      name: 'knitting',
       description: 'be a better person by improving my body and mind'
     },
     {
       id: uuid.v4(),
-      routineId: 5678,
-      name: 'self-care',
-      description: 'be a better person by improving my body and mind'
+      routineId: 8765,
+      name: 'read about flying',
     },
     {
       id: uuid.v4(),
-      routineId: 5678,
-      name: 'self-care',
-      description: 'be a better person by improving my body and mind'
+      routineId: 8765,
+      name: 'get flying lessons',
     },
     {
       id: uuid.v4(),
-      routineId: 5678,
-      name: 'self-care',
-      description: 'be a better person by improving my body and mind'
+      routineId: 8765,
+      name: 'don\'t crash'
     },
     {
       id: uuid.v4(),
-      routineId: 5678,
-      name: 'self-care',
-      description: 'be a better person by improving my body and mind'
+      routineId: 4321,
+      name: 'Get on horse'
     },
     {
       id: uuid.v4(),
-      routineId: 5678,
-      name: 'self-care',
-      description: 'be a better person by improving my body and mind'
+      routineId: 4321,
+      name: 'Take aim with lance'
+    },
+    {
+      id: uuid.v4(),
+      routineId: 4321,
+      name: 'Charge!!!'
     }
 ];

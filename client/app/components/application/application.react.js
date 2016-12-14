@@ -1,20 +1,22 @@
 import React from 'react';
 // import TestComponent from './test-component.react';
 // import PreAuthNav from '../routine/pre-auth-nav.react';
-// import Routine from '../routine/routine.react';
+import Routine from '../routine/routine.react';
 import CreateRoutine from '../routine/create-routine.react';
 import MyRoutines from '../routine/my-routines.react';
 import Task from '../task/task.react';
 import CreateTask from '../task/create-task.react';
 import Home from '../home/home.react';
 import SideMenu from '../side-menu/side-menu.react';
+import { Link, Router, Route, browserHistory } from 'react-router';
+
+// Flux
 import UserActions from '../../flux/actions/user-actions';
-
-
 import UserStore from '../../flux/stores/user-store';
 import RoutineStore from '../../flux/stores/routine-store';
 import TaskStore from '../../flux/stores/task-store';
 
+// material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Theme from '../theme/theme.js';
@@ -95,8 +97,22 @@ export default class Application extends React.Component {
     return (
       <div id='application'>
         <MuiThemeProvider muiTheme={getMuiTheme(Theme)} >
-           <MyRoutines  routines={this.state.routines}
-                        tasks={this.state.tasks} />
+          <Router history={browserHistory}>
+            <Route path='/'  component={MyRoutines}
+                             routines={this.state.routines}
+                             tasks={this.state.tasks}>
+
+            </Route>
+            <Route path='/routines/:id'
+                   component={Routine}
+            />
+            <Route  path='/create-routine'
+                    component={CreateRoutine}>
+            </Route>
+            <Route path='/tasks/:id'
+                   component={Task}
+            />
+          </Router>
         </MuiThemeProvider>
       </div>
     );

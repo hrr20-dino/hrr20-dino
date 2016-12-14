@@ -89,5 +89,13 @@ export default [
         plan: 'Take more relaxing baths'
       }
     ]
+  },
+  {
+    id: 8765,
+    name: 'Learn to fly a plane'
+  },
+  {
+    id: 4321,
+    name: 'Joust'
   }
 ];

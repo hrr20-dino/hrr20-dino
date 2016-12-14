@@ -3,12 +3,14 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import RaisedButton from 'material-ui/RaisedButton';
 import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
+import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import IconButton from 'material-ui/IconButton';
 import Reorder from 'material-ui/svg-icons/action/reorder';
 import * as Colors from 'material-ui/styles/colors';
+import { Link } from 'react-router';
 
 
-export default class CreateRoutineNav extends React.Component {
+export default class MyRoutinesNav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,12 +36,22 @@ export default class CreateRoutineNav extends React.Component {
             <IconButton>
               <Reorder />
             </IconButton>
-            <ToolbarTitle style={logoStyle} text="Team Dino" />
+            <Link to='/'>
+              <ToolbarTitle style={logoStyle} text="Team Dino" />
+            </Link>
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
             {/* insert onClick/onTapTouch to ArrowBack */}
             <ArrowBack />
-            <div style={titleStyle}>Create Routine</div>
+            <div style={titleStyle}>My Routines</div>
+            <Link to='/create-routine'>
+              <RaisedButton
+                label="Create routine"
+                labelPosition="before"
+                primary={true}
+                icon={<AddCircleOutline />}
+              />
+            </Link>
             <ToolbarSeparator />
             {/* insert onClick/onTapTouch to RaisedButton */}
             <RaisedButton

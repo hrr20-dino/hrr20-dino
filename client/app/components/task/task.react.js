@@ -11,7 +11,8 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Launch from 'material-ui/svg-icons/action/launch';
 import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+import { Link } from 'react-router';
 
 export default class Task extends React.Component {
   constructor(props) {
@@ -52,11 +53,12 @@ export default class Task extends React.Component {
           <div>
             <Paper style={paperStyle} zDepth={4}>
             <div>
-              <NavigationClose style={navClose}/>
+              <Link to='/'>
+                <ArrowBack />
+              </Link>
             </div>
             <div style={taskStyle}>
-              <h3>Jog 2 Miles</h3>
-              4 minute intervals with 1 minute rest periods along the San Fran Bay
+              <h3>{this.props.params.id}</h3>
             </div>
             </Paper>
           </div>

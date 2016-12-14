@@ -8,6 +8,9 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import { Link } from 'react-router';
+
+// flux
 import RoutineStore from '../../flux/stores/routine-store';
 import TaskStore from '../../flux/stores/task-store';
 import RoutineActions from '../../flux/actions/routine-actions';
@@ -21,11 +24,46 @@ export default class MyRoutines extends React.Component {
     super(props);
 
     this.state = {
+      routines: [],
+      tasks: []
     };
   }
 
+  componentDidMount() {
+    this.getRoutineData();
+    this.getTaskData();
+
+    RoutineStore.addChangeListener(this.getRoutineData.bind(this));
+    TaskStore.addChangeListener(this.getTaskData.bind(this));
+  }
+
+  componentWillUnmount() {
+    RoutineStore.removeChangeListener(this.getRoutineData);
+    TaskStore.removeChangeListener(this.getTaskData);
+  }
+
+  getRoutineData() {
+    RoutineStore
+      .get()
+      .then((data) => {
+        this.setState({
+          routines: data.collection
+        });
+      });
+  }
+
+  getTaskData() {
+    TaskStore
+      .get()
+      .then((data) => {
+        this.setState({
+          tasks: data.collection
+        });
+      });
+  }
+
   findTasksForRoutine(routine) {
-    return this.props.tasks.filter((task) => {
+    return this.state.tasks.filter((task) => {
       return task.routineId === routine.id;
     });
   }
@@ -46,7 +84,7 @@ export default class MyRoutines extends React.Component {
     return (
       <div>
         <MyRoutinesNav />
-        {this.props.routines.map((routine) => {
+        {this.state.routines.map((routine) => {
           return (
             <Paper key={routine.id} style={paperStyle} zDepth={4}>
               {/* insert onTapTouch for FlatButton */}
@@ -56,7 +94,7 @@ export default class MyRoutines extends React.Component {
                 iconElementLeft={ <IconButton onClick={this.handleRemoveRoutine.bind(this, routine.id)}>
                                     <NavigationClose />
                                   </IconButton> }
-                iconElementRight={<IconButton><Launch /></IconButton>}
+                iconElementRight={ <Link params={{ name: routine.name }} to={`/routines/${routine.name}`}><IconButton><Launch /></IconButton></Link> }
               />
               <List>
 
@@ -68,8 +106,9 @@ export default class MyRoutines extends React.Component {
                       {/* insert onTapTouch for ListItem */}
                       <ListItem
                         primaryText={task.name}
-                        rightIcon={<Launch />}
-                      />
+                        rightIcon={<Link params={{ name: routine.name }} to={`/tasks/${task.name}`}><Launch /></Link>}
+                      >
+                      </ListItem>
                     </div>
                   );
                 })}
