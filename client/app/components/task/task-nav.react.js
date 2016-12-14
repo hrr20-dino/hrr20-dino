@@ -7,6 +7,7 @@ import PowerSettingsNew from 'material-ui/svg-icons/action/power-settings-new';
 import IconButton from 'material-ui/IconButton';
 import Reorder from 'material-ui/svg-icons/action/reorder';
 import * as Colors from 'material-ui/styles/colors';
+import { Link } from 'react-router';
 
 export default class TaskNav extends React.Component {
   constructor(props) {
@@ -34,7 +35,9 @@ export default class TaskNav extends React.Component {
             <IconButton>
               <Reorder />
             </IconButton>
-            <ToolbarTitle style={logoStyle} text="Team Dino" />
+            <Link to='/'>
+              <ToolbarTitle style={logoStyle} text="Team Dino" />
+            </Link>
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
             {/* insert onClick/onTapTouch to ArrowBack */}

@@ -34,7 +34,9 @@ export default class CreateTaskNav extends React.Component {
             <IconButton>
               <Reorder />
             </IconButton>
-            <ToolbarTitle style={logoStyle} text="Team Dino" />
+            <Link to='/'>
+              <ToolbarTitle style={logoStyle} text="Team Dino" />
+            </Link>
           </ToolbarGroup>
           <ToolbarGroup lastChild={true}>
             {/* insert onClick/onTapTouch to ArrowBack */}

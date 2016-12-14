@@ -41,10 +41,10 @@ export default class Routine extends React.Component {
           <div>
             <Paper style={paperStyle} zDepth={4}>
               <List>
-                {/*for each task in routine*/}
-                {/* add specifc routine name within primaryText */}
+                {/* for each task in routine */}
+                {/* add specific task name within primaryText */}
                 <ListItem
-                  primaryText="Test"
+                  primaryText={this.props.params.id}
                   leftCheckbox={<Checkbox />}
                   rightIconButton={launchTask}
                 />

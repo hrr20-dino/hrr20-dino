@@ -65,7 +65,7 @@ export default class CreateRoutine extends React.Component {
 
     return (
       <div>
-        {/*<CreateRoutineNav />*/}
+        <CreateRoutineNav />
         <div style={centerPaper}>
           <div>
             <Paper style={paperStyle} zDepth={4}>
@@ -98,14 +98,16 @@ export default class CreateRoutine extends React.Component {
                   rows={4}
                   onChange={this.handleChange.bind(this, 'description')}
                 />
-                <RaisedButton
-                  label="Add Routine"
-                  labelPosition="before"
-                  primary={true}
-                  icon={<AddCircleOutline />}
-                  onClick={this.handleSubmit.bind(this)}
-                  Link to='/'
-                />
+                <Link to='/'>
+                  <RaisedButton
+                    label="Add Routine"
+                    labelPosition="before"
+                    primary={true}
+                    icon={<AddCircleOutline />}
+                    onClick={this.handleSubmit.bind(this)}
+                    Link to='/'
+                  />
+                </Link>
               </div>
             </ Paper>
           </div>
