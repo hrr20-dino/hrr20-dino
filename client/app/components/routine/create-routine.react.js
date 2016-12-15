@@ -25,8 +25,12 @@ export default class CreateRoutine extends React.Component {
         thursday: false,
         friday: false,
         saturday: false
-      }
+      },
+      tasks: [],
+      task: ''
     };
+
+    this.handleTaskChange = this.handleTaskChange.bind(this);
   }
 
   handleChange(fieldName, event) {
@@ -35,11 +39,17 @@ export default class CreateRoutine extends React.Component {
     });
   }
 
+  handleTaskChange(e){
+    e.preventDefault();
+    this.state.tasks.push(this.state.task);
+    this.forceUpdate();
+  }
+
   handleToggle(day) {
     this.setState({
       days: Object.assign({},
-                            this.state.days,
-                            { [day] : !this.state.days[day] })
+      this.state.days,
+      { [day] : !this.state.days[day] })
     });
   }
 
@@ -48,7 +58,7 @@ export default class CreateRoutine extends React.Component {
     // hard coded user, replace when auth is done.
     //****************
     var userId = 1;
-    console.log('submitting routine!');
+    console.log('submitting routine! state is:', this.state);
 
     $.ajax({
       method: 'POST',
@@ -57,11 +67,14 @@ export default class CreateRoutine extends React.Component {
         name: this.state.name,
         description: this.state.description,
         repeat: this.state.days,
-        _creator: userId
+        _creator: userId,
+        tasks: this.state.tasks
       }),
       dataType: "json",
       contentType: "application/json",
-
+      success: function(res, err){
+        console.log('data posted, res:', res, 'err', err);
+      }
     });
     // RoutineActions.add({
     //   name: this.state.name || '',
@@ -117,6 +130,17 @@ export default class CreateRoutine extends React.Component {
                   rows={4}
                   onChange={this.handleChange.bind(this, 'description')}
                 />
+              {this.state.tasks.map((i, k)=>{
+                return <div key={k}>{i}</div>
+              })}
+                <TextField
+                  type="text"
+                  hintText="ex. 5 sun salutes"
+                  floatingLabelText="Add a task to the routine"
+                  fullWidth={true}
+                  onChange={this.handleChange.bind(this, 'task')}
+                />
+              <a href="#" onClick={this.handleTaskChange}>Add task</a>
                 <Link to='/'>
                   <RaisedButton
                     label="Add Routine"

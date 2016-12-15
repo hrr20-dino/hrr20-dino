@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/catslist');
+mongoose.connect('mongodb://localhost/dinotask');
 
 
 // Routine document. Completed/end_time can be used for history purposes.
@@ -9,7 +9,7 @@ var routineSchema = new mongoose.Schema({
   description: String,
   start_time: Date,
   end_time: Date,
-  repeat: Array,
+  repeat: Object,
   tasks: Array,
   completed: Boolean,
   _creator: { type: Number, ref: 'User'}

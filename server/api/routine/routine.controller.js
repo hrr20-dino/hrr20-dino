@@ -13,7 +13,8 @@ module.exports = {
         end_time: req.body.end_time,
         repeat: req.body.repeat,
         completed: req.body.completed,
-        _creator: req.body.userId
+        _creator: req.body.userId,
+        tasks: req.body.tasks
     }
     db.Routine.create(routine, (err, resp) => {
       if (err) console.log(err);
