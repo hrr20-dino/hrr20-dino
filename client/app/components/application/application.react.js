@@ -22,7 +22,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Theme from '../theme/theme.js';
 
 UserStore.useMockData();
-RoutineStore.useMockData();
+RoutineStore.getData();
 TaskStore.useMockData();
 
 export default class Application extends React.Component {
@@ -36,6 +36,8 @@ export default class Application extends React.Component {
       routines: [],
       tasks: []
     };
+
+    this.getUserData = this.getUserData.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +48,7 @@ export default class Application extends React.Component {
     UserActions.setCurrentUser({
       name: 'Sir Testburg',
       password:'test',
-      id: 1234,
+      id: 1,
       avatar: 'http://www.yesnet.yk.ca/schools/projects/middleages2000/knights/graphics/horse.gif'
     });
 
@@ -65,17 +67,20 @@ export default class Application extends React.Component {
     UserStore
       .get()
       .then((data) => {
+        console.log('User Data is:',data);
         this.setState({
           users: data.collection,
           currentUser: data.currentUser
         });
       });
+      this.forceUpdate();
   }
 
   getRoutineData() {
     RoutineStore
       .get()
       .then((data) => {
+        console.log('Routine Data is:',data);
         this.setState({
           routines: data.collection
         });
@@ -86,6 +91,7 @@ export default class Application extends React.Component {
     TaskStore
       .get()
       .then((data) => {
+        console.log('Task Data is:',data);
         this.setState({
           tasks: data.collection
         });
@@ -105,6 +111,7 @@ export default class Application extends React.Component {
             </Route>
             <Route path='/routines/:id'
                    component={Routine}
+                   test={[1, 2, 3]}
             />
             <Route  path='/create-routine'
                     component={CreateRoutine}>

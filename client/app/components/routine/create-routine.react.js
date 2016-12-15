@@ -44,11 +44,30 @@ export default class CreateRoutine extends React.Component {
   }
 
   handleSubmit() {
-    RoutineActions.add({
-      name: this.state.name || '',
-      description: this.state.description || '',
-      repeat: this.state.days
+    //****************
+    // hard coded user, replace when auth is done.
+    //****************
+    var userId = 1;
+    console.log('submitting routine!');
+
+    $.ajax({
+      method: 'POST',
+      url: "/routines",
+      data: JSON.stringify({
+        name: this.state.name,
+        description: this.state.description,
+        repeat: this.state.days,
+        _creator: userId
+      }),
+      dataType: "json",
+      contentType: "application/json",
+
     });
+    // RoutineActions.add({
+    //   name: this.state.name || '',
+    //   description: this.state.description || '',
+    //   repeat: this.state.days
+    // });
   }
 
   render() {

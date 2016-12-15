@@ -30,8 +30,10 @@ export default class MyRoutines extends React.Component {
   }
 
   componentDidMount() {
+    RoutineStore.getData();
     this.getRoutineData();
     this.getTaskData();
+    this.forceUpdate();
 
     RoutineStore.addChangeListener(this.getRoutineData.bind(this));
     TaskStore.addChangeListener(this.getTaskData.bind(this));
@@ -46,6 +48,7 @@ export default class MyRoutines extends React.Component {
     RoutineStore
       .get()
       .then((data) => {
+        console.log('routine data inside my-routines:', data);
         this.setState({
           routines: data.collection
         });
